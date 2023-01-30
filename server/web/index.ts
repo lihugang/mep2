@@ -74,7 +74,7 @@ app.use('/api/v1', (() => {
 
 app.all('*', (req, res) => {
     const path = `resources${req.path}`;
-    if (fs.existsSync(path)) {
+    if (fs.existsSync(path) && fs.statSync(path).isFile()) {
         const contentType = path.endsWith('.html') ? 'text/html; charset=utf-8' :
             path.endsWith('.js') ? 'application/javascript; charset=utf-8' :
                 path.endsWith('.css') ? 'text/css; charset=utf-8' :
@@ -86,13 +86,13 @@ app.all('*', (req, res) => {
                                         path.endsWith('.pdf') ? 'application/pdf' :
                                             'application/octet-stream';
         if (req.headers['accept-encoding']?.includes('br'))
-            if (fs.existsSync(path + '.br')) {
+            if (fs.existsSync(path + '.br') && fs.statSync(path + '.br').isFile()) {
                 res.set('content-encoding', 'br').set('content-type', contentType).set('cache-control', 'public, max-age=86400');
                 fs.createReadStream(path + '.br').pipe(res);
                 return;
             };
         if (req.headers['accept-encoding']?.includes('gzip'))
-            if (fs.existsSync(path + '.gz')) {
+            if (fs.existsSync(path + '.gz') && fs.statSync(path + '.gz').isFile()) {
                 res.set('content-encoding', 'gzip').set('content-type', contentType).set('cache-control', 'public, max-age=86400');
                 fs.createReadStream(path + '.gz').pipe(res);
                 return;
