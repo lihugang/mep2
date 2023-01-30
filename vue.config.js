@@ -54,17 +54,18 @@ module.exports = defineConfig({
                             chunks: 'all',
                             maxInitialRequests: 4,
                             maxAsyncRequests: 6,
-                            minSize: 30000,
-                            maxSize: 2000000,
+                            minSize: 20480,
+                            maxSize: 4194304,
                             automaticNameDelimiter: '.',
                             minChunks: 3,
                             cacheGroups: {
-                                vendors: {
+                                vendor: {
                                     test: /[\\/]node_modules[\\/]/,
                                     priority: -10,
+                                    reuseExistingChunk: true,
                                     name: (module) => {
                                         const packageName = (module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/) || [null, 'unknown_module.' + new Date().getTime()])[1];
-                                        return `${packageName.replace('@', '')}`;
+                                        return `module.${packageName.replace('@', '-')}`;
                                     }
                                 }
                             }
