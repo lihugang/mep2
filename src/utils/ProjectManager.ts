@@ -317,7 +317,7 @@ export class Project {
         };
 
         if (embedFonts) {
-            const fontData = await this.getFonts(i18n);
+            const fontData = await this.getFonts();
             json.fonts = fontData;
         }
 
@@ -348,7 +348,7 @@ export class Project {
         });
     }
 
-    getFonts(i18n: i18nMap): Promise<Record<string, string>> {
+    getFonts(): Promise<Record<string, string>> {
         return new Promise((resolve) => {
             const result: Record<string, string> = {};
             const supportFonts: {

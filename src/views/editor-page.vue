@@ -18,7 +18,7 @@
             :project="currentProject" :currentPage="projectPreview.pageID"
             :width="parseInt(mainRegionLayout.canvas.width ?? '0')"
             :height="parseInt(mainRegionLayout.canvas.height ?? '0')" :mode="userOperationMode"
-            @insert-statement="canvasInsertStatement" :platform="platform"/>
+            @insert-statement="canvasInsertStatement" :platform="platform" />
         <image-manager ref="imageManagerRef" class="image-manager" :style="(mainRegionLayout.image as CSSProperties)"
             :i18n="props.i18n" :project="currentProject" :height="mainRegionLayout.image.height ?? '0px'"
             :width="mainRegionLayout.image.width ?? '0px'" />
@@ -91,7 +91,13 @@ const currentStatus = reactive({
 const statusBarRef = ref<InstanceType<typeof statusBar>>();
 watch(statusBarRef, () => {
     if (statusBarRef.value) {
-        platform.value = statusBarRef.value.showPlatform;
+        const intervalID = setInterval(() => {
+            if (statusBarRef.value) {
+                platform.value = statusBarRef.value.showPlatform;
+                clearInterval(intervalID);
+            }
+        }, 200);
+        // cannot watch .showPlatform, time always change, if use watch with options deep:true, performance will be worse
     }
 });
 
