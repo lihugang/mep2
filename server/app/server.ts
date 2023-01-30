@@ -9,7 +9,7 @@ import * as os from 'os';
 import * as download from 'download';
 import fetch from 'node-fetch';
 
-export default function startServer(config: {
+export default function startServer (config: {
     port: number
 }, destroyElectron: () => void, dialog: (str: string) => void) {
     const app = express();
@@ -30,7 +30,7 @@ export default function startServer(config: {
                     language: 'en-US',
                     editor: {
                         color: '#ff0000',
-                        fontSize: 60,
+                        fontSize: 60
                     },
                     snippets: []
                 };
@@ -69,7 +69,7 @@ export default function startServer(config: {
                 let history: string[] = [];
                 try {
                     history = JSON.parse(fs.readFileSync(pathLib.join(os.homedir(), '.mep2-history')).toString());
-                } catch { };
+                } catch { }
                 res.status(200).json({
                     ok: true,
                     data: history.filter(Boolean)
@@ -80,7 +80,7 @@ export default function startServer(config: {
                 let history: string[] = [];
                 try {
                     history = JSON.parse(fs.readFileSync(pathLib.join(os.homedir(), '.mep2-history')).toString());
-                } catch { };
+                } catch { }
                 history.unshift(req.body.filepath);
                 history = [...new Set(history)];
                 if (history.length > 5) history.pop();
@@ -106,32 +106,33 @@ export default function startServer(config: {
                 const tmpPath = pathLib.join(os.tmpdir(), tmpDirectoryName);
                 try {
                     fs.mkdirSync(tmpPath);
-                } catch { };
+                } catch { }
                 const tmpFilename = pathLib.join(tmpPath, 'mep2-latest');
                 const writeStream = fs.createWriteStream(tmpFilename, {
                     autoClose: true
                 });
+                let filename = 'mep2-latest-installer';
                 try {
-                    var filename: string = await (await fetch(`https://mep2.deta.dev/latest.filename?platform=${process.platform}&arch=${process.arch}`)).text();
+                    filename = await (await fetch(`https://mep2.deta.dev/latest.filename?platform=${process.platform}&arch=${process.arch}`)).text();
                 } catch {
                     dialog('Failed to connect to download server, please visit please visit https://mep2.deta.dev/download to download and install it manually.');
-                };
+                }
                 const downloadStream = download(`https://mep2.deta.dev/latest?platform=${process.platform}&arch=${process.arch}`);
                 downloadStream.pipe(writeStream);
-                downloadStream.catch(err => {
+                downloadStream.catch(() => {
                     dialog('Failed to download the latest installer, please visit https://mep2.deta.dev/download to download and install it manually.');
                     destroyElectron();
                 });
                 writeStream.on('close', () => {
                     const writeStream = fs.createWriteStream(pathLib.join(os.homedir(), filename), {
-                        autoClose: true,
+                        autoClose: true
                     });
                     fs.createReadStream(tmpFilename).pipe(writeStream);
                     writeStream.on('close', () => {
                         dialog(`The latest installer is downloaded at ${pathLib.join(os.homedir(), filename)}, please install it manually.`);
                         destroyElectron();
                     });
-                })
+                });
 
                 res.status(202).json({
                     ok: 1
@@ -147,49 +148,59 @@ export default function startServer(config: {
     app.all('*', (req, res) => {
         const path = `resources${req.path}`;
         if (fs.existsSync(path) && fs.statSync(path).isFile()) {
-            const contentType = path.endsWith('.html') ? 'text/html; charset=utf-8' :
-                path.endsWith('.js') ? 'application/javascript; charset=utf-8' :
-                    path.endsWith('.css') ? 'text/css; charset=utf-8' :
-                        path.endsWith('.txt') ? 'text/plain; charset=utf-8' :
-                            path.endsWith('.json') ? 'application/json; charset=utf-8' :
-                                path.endsWith('.svg') ? 'image/svg+xml' :
-                                    path.endsWith('.png') ? 'image/png' :
-                                        path.endsWith('.ttf') ? 'fonts/ttf' :
-                                            path.endsWith('.pdf') ? 'application/pdf' :
-                                                'application/octet-stream';
-            if (req.headers['accept-encoding']?.includes('br'))
+            const contentType = path.endsWith('.html')
+                ? 'text/html; charset=utf-8'
+                : path.endsWith('.js')
+                    ? 'application/javascript; charset=utf-8'
+                    : path.endsWith('.css')
+                        ? 'text/css; charset=utf-8'
+                        : path.endsWith('.txt')
+                            ? 'text/plain; charset=utf-8'
+                            : path.endsWith('.json')
+                                ? 'application/json; charset=utf-8'
+                                : path.endsWith('.svg')
+                                    ? 'image/svg+xml'
+                                    : path.endsWith('.png')
+                                        ? 'image/png'
+                                        : path.endsWith('.ttf')
+                                            ? 'fonts/ttf'
+                                            : path.endsWith('.pdf')
+                                                ? 'application/pdf'
+                                                : 'application/octet-stream';
+            if (req.headers['accept-encoding']?.includes('br')) {
                 if (fs.existsSync(path + '.br') && fs.statSync(path + '.br').isFile()) {
                     res.set('content-encoding', 'br').set('content-type', contentType).set('cache-control', 'public, max-age=86400');
                     fs.createReadStream(path + '.br').pipe(res);
                     return;
-                };
-            if (req.headers['accept-encoding']?.includes('gzip'))
+                }
+            }
+            if (req.headers['accept-encoding']?.includes('gzip')) {
                 if (fs.existsSync(path + '.gz') && fs.statSync(path + '.gz').isFile()) {
                     res.set('content-encoding', 'gzip').set('content-type', contentType).set('cache-control', 'public, max-age=86400');
                     fs.createReadStream(path + '.gz').pipe(res);
                     return;
-                };
+                }
+            }
             res.set('content-type', contentType).set('cache-control', 'public, max-age=86400');
             fs.createReadStream(path).pipe(res);
-
         } else {
             // file not exists, fallback to index.html
             const content = fs.readFileSync('resources/index.html').toString();
             const sha256 = crypto.createHash('sha256').update(content).digest('hex');
             if (req.headers['If-None-Match'] === sha256) {
                 return res.status(304).send('');
-            };
+            }
             res.set('content-type', 'text/html; charset=utf-8');
             res.set('etag', sha256);
             res.send(content);
-        };
+        }
     });
 
     app.listen(config.port);
     console.log('Server is listening on', config.port);
-};
+}
 
 if (process.argv.indexOf('--entry') !== -1) {
     const config = JSON.parse(fs.readFileSync('config.json').toString());
     startServer(config, () => process.exit(0), console.log);
-};
+}

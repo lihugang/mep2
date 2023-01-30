@@ -38,4 +38,4 @@ app.on('ready', () => {
         if (process.argv.indexOf('--app-debug') !== -1 && mainWindow) mainWindow.webContents.openDevTools();
     });
     mainWindow.loadURL('http://localhost:' + port);
-})
+});
