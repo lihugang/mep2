@@ -47,7 +47,8 @@
             "server.js",
             "config.json",
             "icon.ico",
-            "node_modules"
+            "node_modules",
+            "resources"
         ],
         "appId": "MEP@2",
         "compression": "maximum",
