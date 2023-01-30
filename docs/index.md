@@ -10,8 +10,8 @@ The official website of MEP@2 is <https://mep2.deta.dev>. Source code address is
 Use your browser to visit <https://mep2.deta.dev/download> or <https://github.com/lihugang/mep2/releases> and download the version which you wants to use. Generally, we offered 64-bit executable files for Windows. If you want to use it in other platforms, please send an issue at <https://github.com/lihugang/mep2/issues> or build it on your own.
 - - -
 ### How to build
-1. Clone repository from GitHub `git clone https://github.com/lihugang/mep@2.git --depth=1`
-2. Change directory to cloned repository `cd mep@2`
+1. Clone repository from GitHub `git clone https://github.com/lihugang/mep2.git --depth=1`
+2. Change directory to cloned repository `cd mep2`
 3. Install dependicies `pnpm install`
 4. Build frontend programs `pnpm run build` (You must install **node** and **pnpm** first)
 - - -
