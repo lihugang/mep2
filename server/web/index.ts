@@ -4,13 +4,23 @@ import * as crypto from 'crypto';
 import * as _ from 'lodash';
 import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
+import { rateLimit } from 'express-rate-limit';
 
 const app = express();
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.set('json spaces', 4);
 app.disable('X-Powered-By');
-const config = JSON.parse(fs.readFileSync('config.json').toString());
+const config: {
+    port: number;
+    rateLimit: {
+        windowMs: number;
+        max: number;
+        standardHeaders: boolean;
+        leagcyHeaders: boolean;
+        message: string;
+    }
+} = JSON.parse(fs.readFileSync('config.json').toString());
 
 app.use('/api/v1', (() => {
     const router = express.Router();
@@ -71,6 +81,9 @@ app.use('/api/v1', (() => {
 
     return router;
 })());
+
+const limiter = rateLimit(config.rateLimit);
+app.use(limiter);
 
 app.all('*', (req, res) => {
     const path = `resources${req.path}`;

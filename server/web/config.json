@@ -1,3 +1,10 @@
 {
-    "port": 10399
+    "port": 10399,
+    "rateLimit": {
+        "windowMs": 60000,
+        "max": 50,
+        "standardHeaders": true,
+        "leagcyHeaders": false,
+        "message": "Too many requests, please retry in one minute."
+    }
 }
