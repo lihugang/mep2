@@ -24,11 +24,7 @@ app.on('ready', () => {
         fullscreenable: true,
         alwaysOnTop: false,
         skipTaskbar: false,
-        frame: true,
-        webPreferences: {
-            webSecurity: false,
-            contextIsolation: true
-        }
+        frame: true
     });
     mainWindow.on('close', () => {
         app.quit();
