@@ -7,4 +7,15 @@ Download: ![download](https://img.shields.io/github/downloads/lihugang/mep2/tota
 Issues: ![](https://img.shields.io/github/issues/lihugang/mep2) ![](https://img.shields.io/github/issues-closed/lihugang/mep2)  
 PRs: ![](https://img.shields.io/github/issues-pr/lihugang/mep2) ![](https://img.shields.io/github/issues-pr-closed/lihugang/mep2)  
 - - -
-For further information, please see `docs/index.md` or <https://mep2.deta.dev/documentation>
+# Features
+- Based on `Electron` `22.1.0`
+- Lite & Fast
+- Exports support .png & .pdf
+- Support import images, support many image formats
+- Have web-platform version
+# TODO
+- Support version controls (like `git`)
+- Support file transfer and collaborative editing
+- Import the performance of `html2canvas` (text&LaTeX to image)
+- - -
+For further information, please read `docs/index.md` or <https://mep2.deta.dev/documentation>
