@@ -19,7 +19,7 @@
                 }">
                     MEP Version 2.0.0 <img height="32" width="32" src="../../public/img/icons/logo.png" title="logo">
                     <br />
-                    Release Time: 01-29-2023 <br />
+                    Release Time: 01-30-2023 <br />
                     Official website: <a href="https://mep2.deta.dev">mep2.deta.dev</a> <br />
                     GitHub: <a href="https://github.com/lihugang/mep2">https://github.com/lihugang/mep2</a> <br />
                     License: <a href="/gpl-3.0.pdf" target="_blank">GPL 3.0</a> <br />
