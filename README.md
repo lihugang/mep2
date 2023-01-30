@@ -17,5 +17,7 @@ PRs: ![](https://img.shields.io/github/issues-pr/lihugang/mep2) ![](https://img.
 - Support version controls (like `git`)
 - Support file transfer and collaborative editing
 - Import the performance of `html2canvas` (text&LaTeX to image)
+- PWA Support
+- Lite functions for mobile side
 - - -
 For further information, please read `docs/index.md` or <https://mep2.deta.dev/documentation>
