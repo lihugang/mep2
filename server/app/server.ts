@@ -9,7 +9,7 @@ import * as os from 'os';
 import * as download from 'download';
 import fetch from 'node-fetch';
 
-export default function startServer (config: {
+export default function startServer(config: {
     port: number
 }, destroyElectron: () => void, dialog: (str: string) => void) {
     const app = express();
@@ -146,7 +146,7 @@ export default function startServer (config: {
     })());
 
     app.all('*', (req, res) => {
-        const path = `resources${req.path}`;
+        const path = process.argv.indexOf('--app-debug') === -1 ? `resources/app/resources${req.path}` /* Electron Pack */ : `resources${req.path}`;/* Debug Mode */
         if (fs.existsSync(path) && fs.statSync(path).isFile()) {
             const contentType = path.endsWith('.html')
                 ? 'text/html; charset=utf-8'
@@ -185,7 +185,8 @@ export default function startServer (config: {
             fs.createReadStream(path).pipe(res);
         } else {
             // file not exists, fallback to index.html
-            const content = fs.readFileSync('resources/index.html').toString();
+            const indexPath = process.argv.indexOf('--app-debug') === -1 ? 'resources/app/resources/index.html' /* Electron Pack */ : 'resources/index.html';/* Debug Mode */
+            const content = fs.readFileSync(indexPath).toString();
             const sha256 = crypto.createHash('sha256').update(content).digest('hex');
             if (req.headers['If-None-Match'] === sha256) {
                 return res.status(304).send('');

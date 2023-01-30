@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "preinstall": "npx only-allow pnpm",
-        "dev-server": "tsc server.ts --target esnext --skipLibCheck --module commonjs && node server.js --entry",
+        "dev-server": "tsc server.ts --target esnext --skipLibCheck --module commonjs && node server.js --entry --app-debug",
         "dev-app": "tsc index.ts --target esnext --skipLibCheck --module commonjs && electron index.js --app-debug",
         "build": "electron-builder"
     },
