@@ -9,4 +9,10 @@ export interface config {
         text: string;
         code: string;
     }[];
+    experiments: {
+        renderThreadPool: {
+            enable: boolean;
+            counts: number;
+        }
+    }
 }

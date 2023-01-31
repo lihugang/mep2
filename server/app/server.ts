@@ -32,7 +32,13 @@ export default function startServer(config: {
                         color: '#ff0000',
                         fontSize: 60
                     },
-                    snippets: []
+                    snippets: [],
+                    experiments: {
+                        renderThreadPool: {
+                            enable: false,
+                            counts: 2
+                        }
+                    }
                 };
                 try {
                     const userConfig = JSON.parse(fs.readFileSync(pathLib.join(os.homedir(), '.mep2rc')).toString());
@@ -61,7 +67,7 @@ export default function startServer(config: {
             router.get('/currentVersion', (req, res) => {
                 res.status(200).json({
                     ok: true,
-                    data: [2, 0, 0]
+                    data: [2, 0, 1]
                 });
             });
 

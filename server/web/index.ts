@@ -36,7 +36,13 @@ app.use('/api/v1', (() => {
                     color: '#ff0000',
                     fontSize: 60
                 },
-                snippets: []
+                snippets: [],
+                experiments: {
+                    renderThreadPool: {
+                        enable: false,
+                        counts: 2
+                    }
+                }
             };
             try {
                 const userConfig = JSON.parse(req.cookies.config);
@@ -65,7 +71,7 @@ app.use('/api/v1', (() => {
         router.get('/currentVersion', (req, res) => {
             res.status(200).json({
                 ok: true,
-                data: [2, 0, 0]
+                data: [2, 0, 1]
             });
         });
 
