@@ -21,7 +21,13 @@ const userConfig = reactive<config>({
         color: '',
         fontSize: 1
     },
-    snippets: []
+    snippets: [],
+    experiments: {
+        renderThreadPool: {
+            enable: false,
+            counts: 2
+        }
+    }
 });
 
 const i18nData = reactive<{
@@ -36,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userConfig.fontFamily = response.data.fontFamily;
         userConfig.language = response.data.language;
         userConfig.editor = response.data.editor;
+        userConfig.experiments = response.data.experiments;
         // get config, load i18n components
         i18n(userConfig.language).then((value) => {
             i18nData.data = value;

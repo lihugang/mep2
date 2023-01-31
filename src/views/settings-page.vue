@@ -62,6 +62,36 @@
                         </tbody>
                     </table>
                     <br /><br />
+                    <hr />
+                    <details>
+                        <summary>Experiment features</summary>
+                        <span class="warning">WARNING: EXPERIMENTAL FEATURES AHEAD! By enabling these features, you
+                            could lose your data, compromise your security or privacy or reduce stability. Please choose
+                            them after think over and over. If you have any problem about them, please contact us at <a
+                                href="https://github.com/lihugang/mep2/issues"
+                                target="_blank">https://github.com/lihugang/mep2/issues</a></span>
+                        <hr />
+                        <div class="experiment-container">
+                            <strong>Render thread pool</strong> <span class="button"
+                                @click="customConfig.experiments.renderThreadPool.enable = !customConfig.experiments.renderThreadPool.enable"><template
+                                    v-if="customConfig.experiments.renderThreadPool.enable">Enabled</template><template
+                                    v-else>Disabled</template> </span>
+                            <br />
+                            Use a thread(window) pool to convert text to images and make easier to render them in
+                            canvas. It will pop up a set of windows, may be banned by browser, please allow this action
+                            if you enable this. For further information, please see <a
+                                href="https://github.com/lihugang/mep2/issues/1" target="_blank">Issue/1</a>
+                        </div>
+                        <div class="experiment-container" v-if="customConfig.experiments.renderThreadPool.enable">
+                            <strong>Render thread pool / thread counts</strong> &nbsp;
+                            <input type="number" v-model="customConfig.experiments.renderThreadPool.counts" min="1"
+                                max="32" /> <br />
+                            The count of threads in the rendering thread pool.
+                        </div>
+
+                    </details>
+                    <hr />
+                    <br />
                     <span class="button" @click="saveConfig">{{ props.i18n.save }}</span>
                 </div>
             </div>
@@ -142,6 +172,22 @@ input {
 input::selection {
     background-color: orangered;
     color: snow;
+}
+
+.warning {
+    color: orangered;
+}
+
+.experiment-container {
+    border: 1px solid rgb(200, 241, 192);
+    padding: 4px 20px;
+    margin: 3px;
+}
+
+.experiment-container .button {
+    border: 1px solid gainsboro;
+    background-color: lightcyan;
+    float: right;
 }
 </style>
 <script lang="ts" setup>
