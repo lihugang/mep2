@@ -9,7 +9,7 @@ import * as os from 'os';
 import * as download from 'download';
 import fetch from 'node-fetch';
 
-export default function startServer(config: {
+export default function startServer (config: {
     port: number
 }, destroyElectron: () => void, dialog: (str: string) => void) {
     const app = express();

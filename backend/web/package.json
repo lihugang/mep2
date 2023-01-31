@@ -1,6 +1,6 @@
 {
     "name": "mep-2-web-server",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "The web server for mep@2",
     "main": "index.js",
     "scripts": {
