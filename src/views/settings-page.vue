@@ -14,7 +14,9 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;
                     </ul>
                 </div>
-                <div class="settings-container">
+                <div class="settings-container" :style="{
+                    height: windowHeight - 180 + 'px'
+                }">
                     {{ props.i18n.language }}: <select class="language-select" v-model="customConfig.language">
                         <option value="en-US">en-US</option>
                         <option value="zh-CN">zh-CN</option>
@@ -225,4 +227,9 @@ const insertSnippets = () => {
 const saveConfig = () => {
     updateConfig(customConfig).then(() => location.reload());
 };
+
+const windowHeight = ref(window.innerHeight);
+window.addEventListener('resize', () => {
+    windowHeight.value = window.innerHeight;
+});
 </script>
