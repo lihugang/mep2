@@ -20,6 +20,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '/about',
         name: 'about',
         component: () => import('@/views/about-page.vue')
+    },
+    {
+        path: '/experiments/renderThread',
+        name: 'exp/render-thread',
+        component: () => import('@/views/html2canvas-thread.vue')
     }
 ];
 

@@ -1,7 +1,8 @@
 import Project from './ProjectManager';
 import renderImage from './renderImage';
 import { PDFDocument } from 'pdf-lib';
-import html2canvas from 'html2canvas';
+// eslint-disable-next-line camelcase
+import { Options as h2c_Options } from 'html2canvas';
 
 const getTimeFormat = () => {
     return new Date(
@@ -21,11 +22,11 @@ const loadImage = (dataurl: string) => {
     });
 };
 
-// eslint-disable-next-line space-before-function-paren
-export default function render(project: Project, pageID: number, isRenderAllPages: boolean, isExportImages: boolean, isRenderWatermark: boolean, setProgress?: (progress: number) => void) {
+// eslint-disable-next-line space-before-function-paren, camelcase
+export default function render(project: Project, pageID: number, isRenderAllPages: boolean, isExportImages: boolean, isRenderWatermark: boolean, html2png: (element: HTMLElement, options?: Partial<h2c_Options> | undefined, width?: number) => Promise<string>, setProgress?: (progress: number) => void) {
     if (!isRenderAllPages) {
         const page = project.pages[pageID - 1];
-        renderImage(page.AST, project.images, page.getLaTeXMacros(), isRenderWatermark).then((dataurl: string) => {
+        renderImage(page.AST, project.images, page.getLaTeXMacros(), isRenderWatermark, html2png).then((dataurl: string) => {
             setProgress && setProgress(80);
             if (isExportImages) {
                 fetch(dataurl)
@@ -76,7 +77,8 @@ export default function render(project: Project, pageID: number, isRenderAllPage
                     page.AST,
                     project.images,
                     page.getLaTeXMacros(),
-                    isRenderWatermark
+                    isRenderWatermark,
+                    html2png
                 );
                 const image = await loadImage(dataurl);
                 const pdfPage = doc.addPage([image.width, image.height]);
@@ -105,24 +107,26 @@ export default function render(project: Project, pageID: number, isRenderAllPage
     } else if (isRenderAllPages && isExportImages) {
         (async () => {
             const renderDiv = document.createElement('div');
+            let maxWidth = -1;
             for (let i = 0; i < project.pages.length; ++i) {
                 const page = project.pages[i];
                 const dataurl = await renderImage(
                     page.AST,
                     project.images,
                     page.getLaTeXMacros(),
-                    isRenderWatermark
+                    isRenderWatermark,
+                    html2png
                 );
                 const image = await loadImage(dataurl);
+                maxWidth = Math.max(maxWidth, image.width);
                 renderDiv.appendChild(image);
                 renderDiv.appendChild(document.createElement('br'));
                 setProgress && setProgress(parseInt((i / project.pages.length * 100).toString()));
             }
             document.body.insertBefore(renderDiv, document.body.childNodes[0]);
-            const canvas = await html2canvas(renderDiv);
+            const dataurl = await html2png(renderDiv, {}, maxWidth);
             document.body.removeChild(renderDiv);
             setProgress && setProgress(100);
-            const dataurl = canvas.toDataURL('image/png', 1);
             fetch(dataurl)
                 .then(response => response.blob())
                 .then(blob => {

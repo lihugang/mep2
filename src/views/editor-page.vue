@@ -18,7 +18,7 @@
             :project="currentProject" :currentPage="projectPreview.pageID"
             :width="parseInt(mainRegionLayout.canvas.width ?? '0')"
             :height="parseInt(mainRegionLayout.canvas.height ?? '0')" :mode="userOperationMode"
-            @insert-statement="canvasInsertStatement" :platform="platform" />
+            @insert-statement="canvasInsertStatement" :platform="platform" :renderText="html2canvas" />
         <image-manager ref="imageManagerRef" class="image-manager" :style="(mainRegionLayout.image as CSSProperties)"
             :i18n="props.i18n" :project="currentProject" :height="mainRegionLayout.image.height ?? '0px'"
             :width="mainRegionLayout.image.width ?? '0px'" />
@@ -66,6 +66,7 @@ import { CodeKeyWord, ParseCodeError } from '@/utils/AST/AST.type';
 import isElectron from '@/api/isElectron';
 import updateHistoryRecord from '@/api/updateHistoryRecord';
 import render from '@/utils/render&export';
+import html2canvasFactory from '@/utils/html2canvasWithThread';
 
 const props = defineProps<{
     config: config,
@@ -73,6 +74,8 @@ const props = defineProps<{
 }>();
 
 const platform = ref('');
+
+const html2canvas = html2canvasFactory(props.config);
 
 // load components async to improve loading speed
 
@@ -430,7 +433,7 @@ const onRenderRequest = (isRenderAllPages: boolean, isExportImages: boolean) => 
             renderOptionsRef.value.options.isRenderAllPages = isRenderAllPages;
             renderOptionsRef.value.options.isExportImages = isExportImages;
             renderOptionsRef.value.onUserConfirm = (isUseWatermark: boolean, setProgress) => {
-                render(currentProject.value, projectPreview.pageID, isRenderAllPages, isExportImages, isUseWatermark, setProgress);
+                render(currentProject.value, projectPreview.pageID, isRenderAllPages, isExportImages, isUseWatermark, html2canvas, setProgress);
             };
             renderOptionsRef.value.onUserCancel = () => {
                 isShowRenderOptionsPopup.value = false;

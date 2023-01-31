@@ -12,7 +12,8 @@ import { CodeKeyWord } from '@/utils/AST/AST.type';
 import katex from 'katex';
 import 'katex/dist/katex.css';
 import calcSha256 from 'sha256';
-import html2canvas from 'html2canvas';
+// eslint-disable-next-line camelcase
+import { Options as h2c_Options } from 'html2canvas';
 
 const props = defineProps<{
     project: Project,
@@ -20,7 +21,9 @@ const props = defineProps<{
     width: number,
     height: number,
     mode: 'normal' | 'insert-text' | 'draw',
-    platform: string
+    platform: string,
+    // eslint-disable-next-line camelcase, func-call-spacing
+    renderText: (element: HTMLElement, options?: Partial<h2c_Options> | undefined, width?: number) => Promise<string>
 }>();
 
 const emits = defineEmits(['insertStatement']);
@@ -201,16 +204,16 @@ watch(canvasRef, () => {
                                     renderDiv.style.color = currentColor;
                                     renderDiv.style.font = currentFont;
                                     renderDiv.style.fontSize = currentSize + 'px';
+                                    renderDiv.style.width = canvasRef.value!.width - renderX + 'px';/* auto change into next line */
 
                                     document.body.insertBefore(renderDiv, document.body.childNodes[0]);
                                     setTimeout(() => {
-                                        html2canvas(renderDiv, {
+                                        props.renderText(renderDiv, {
                                             backgroundColor: null, // background transparent
                                             useCORS: true,
                                             logging: false
-                                        }).then(canvas => {
+                                        }, canvasRef.value!.width - renderX /* auto change into next line */).then(dataurl => {
                                             document.body.removeChild(renderDiv);
-                                            const dataurl = canvas.toDataURL('image/png');
                                             // eslint-disable-next-line vue/no-mutating-props
                                             props.project.cache.LaTeX.code2Image[contentSha256] = dataurl;
                                             const img = new Image();

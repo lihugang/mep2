@@ -1,6 +1,7 @@
 /* eslint-disable space-before-function-paren */
 import { Project } from '@/utils/ProjectManager';
-import html2canvas from 'html2canvas';
+// eslint-disable-next-line camelcase
+import { Options as h2c_Options } from 'html2canvas';
 import katex from 'katex';
 import _ from 'lodash';
 import calcSha256WithWorker from './calcSha256WithWorker';
@@ -8,7 +9,8 @@ import calcSha256WithWorker from './calcSha256WithWorker';
 import { CodeAST, CodeKeyWord, ParseCodeError } from './AST/AST.type';
 import { toRaw } from 'vue';
 
-export default function renderImage(AST: CodeAST, _images: Project['images'], LaTeXMacros: ReturnType<Project['pages'][number]['getLaTeXMacros']>, isRenderWaterMark: boolean) {
+// eslint-disable-next-line camelcase
+export default function renderImage(AST: CodeAST, _images: Project['images'], LaTeXMacros: ReturnType<Project['pages'][number]['getLaTeXMacros']>, isRenderWaterMark: boolean, html2png: (element: HTMLElement, options?: Partial<h2c_Options> | undefined, width?: number) => Promise<string>) {
     return new Promise<string>((resolve, reject) => {
         // ensure render qualities, not use cache
         let processAST: CodeAST = [];
@@ -79,27 +81,47 @@ export default function renderImage(AST: CodeAST, _images: Project['images'], La
                             renderDiv.style.color = currentColor;
                             renderDiv.style.font = currentFont;
                             renderDiv.style.fontSize = currentSize + 'px';
+                            const renderX = parseInt((statement.method === CodeKeyWord.ABS
+                                ? statement.x
+                                : (statement.x * CanvasSize.width)).toString());
+                            renderDiv.style.width = CanvasSize.width - renderX + 'px'; /* auto change into next line */
 
                             document.body.insertBefore(renderDiv, document.body.childNodes[0]);
                             setTimeout(() => {
-                                html2canvas(renderDiv, {
+                                html2png(renderDiv, {
                                     backgroundColor: null, // background transparent
                                     useCORS: true,
                                     logging: false
-                                }).then(canvas => {
+                                }, CanvasSize.width - renderX /* auto change into next line */).then(dataurl => {
                                     document.body.removeChild(renderDiv);
-                                    const dataurl = canvas.toDataURL('image/png');
                                     calcSha256WithWorker(dataurl).then(sha256 => {
-                                        images[sha256] = dataurl;
-                                        processAST[index] = {
-                                            type: CodeKeyWord.IMAGE,
-                                            image: sha256,
-                                            x: statement.x,
-                                            y: statement.y,
-                                            method: statement.method,
-                                            size: [CodeKeyWord.ABS, canvas.width, canvas.height]
+                                        const imageElement = new Image();
+                                        imageElement.src = dataurl;
+                                        imageElement.onload = () => {
+                                            images[sha256] = dataurl;
+                                            processAST[index] = {
+                                                type: CodeKeyWord.IMAGE,
+                                                image: sha256,
+                                                x: statement.x,
+                                                y: statement.y,
+                                                method: statement.method,
+                                                size: [CodeKeyWord.ABS, imageElement.width, imageElement.height]
+                                            };
+                                            resolve();
                                         };
-                                        resolve();
+                                        if (dataurl === 'data:,') {
+                                            // cannot be loaded
+                                            images[sha256] = dataurl;
+                                            processAST[index] = {
+                                                type: CodeKeyWord.IMAGE,
+                                                image: sha256,
+                                                x: statement.x,
+                                                y: statement.y,
+                                                method: statement.method,
+                                                size: [CodeKeyWord.ABS, 0, 0]
+                                            };
+                                            resolve();
+                                        }
                                     }).catch(console.error);
                                 }).catch(console.error);
                             }, 50);
@@ -113,6 +135,7 @@ export default function renderImage(AST: CodeAST, _images: Project['images'], La
         if (isError) return;
         Promise.all(awaitPromises).then(async () => {
             processAST = processAST.filter(Boolean); // filter undefined
+            process.env.NODE_ENV !== 'production' && console.log(processAST);
             const canvas = document.createElement('canvas');
             canvas.height = CanvasSize.height;
             canvas.width = CanvasSize.width;
