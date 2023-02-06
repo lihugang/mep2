@@ -1,27 +1,29 @@
 <template>
     <div class="bkg"></div>
-    <project-preview-bar :pageID="projectPreview.pageID" :project-name="projectPreview.projectName"
-        ref="projectPreviewBarRef" />
-    <status-bar :i18n="props.i18n" :status="currentStatus.text" :status-style="currentStatus.style"
-        ref="statusBarRef" />
-    <tool-bar :i18n="props.i18n" ref="pageConfig" @open-file="openFile" @switch-page="switchPage" class="tool"
-        @setting-change="settingChange" @render="onRenderRequest" @save="onSave" />
+    <div class="root">
+        <project-preview-bar :pageID="projectPreview.pageID" :project-name="projectPreview.projectName"
+            ref="projectPreviewBarRef" />
+        <status-bar :i18n="props.i18n" :status="currentStatus.text" :status-style="currentStatus.style"
+            ref="statusBarRef" />
+        <tool-bar :i18n="props.i18n" ref="pageConfig" @open-file="openFile" @switch-page="switchPage" class="tool"
+            @setting-change="settingChange" @render="onRenderRequest" @save="onSave" />
 
-    <div class="main" :style="(mainRegionPos as CSSProperties)" ref="mainRef">
-        <editor-core ref="editorCoreRef" :i18n="props.i18n" class="editor-core"
-            :style="(mainRegionLayout.editor as CSSProperties)" @compile-error="onCompileError"
-            @preview="onEditorPreview" :doAction="editorAction" :snippets="props.config.snippets" />
-        <render-preview ref="renderPreviewRef" class="render-preview"
-            :style="(mainRegionLayout.preview as CSSProperties)" :height="mainRegionLayout.preview.height ?? '0px'"
-            :width="mainRegionLayout.preview.width ?? '0px'" />
-        <render-canvas ref="renderCanvasRef" class="render-canvas" :style="(mainRegionLayout.canvas as CSSProperties)"
-            :project="currentProject" :currentPage="projectPreview.pageID"
-            :width="parseInt(mainRegionLayout.canvas.width ?? '0')"
-            :height="parseInt(mainRegionLayout.canvas.height ?? '0')" :mode="userOperationMode"
-            @insert-statement="canvasInsertStatement" :platform="platform" :renderText="html2canvas" />
-        <image-manager ref="imageManagerRef" class="image-manager" :style="(mainRegionLayout.image as CSSProperties)"
-            :i18n="props.i18n" :project="currentProject" :height="mainRegionLayout.image.height ?? '0px'"
-            :width="mainRegionLayout.image.width ?? '0px'" />
+        <div class="main" :style="(mainRegionPos as CSSProperties)" ref="mainRef">
+            <editor-core ref="editorCoreRef" :i18n="props.i18n" class="editor-core"
+                :style="(mainRegionLayout.editor as CSSProperties)" @compile-error="onCompileError"
+                @preview="onEditorPreview" :doAction="editorAction" :snippets="props.config.snippets" />
+            <render-preview ref="renderPreviewRef" class="render-preview"
+                :style="(mainRegionLayout.preview as CSSProperties)" :height="mainRegionLayout.preview.height ?? '0px'"
+                :width="mainRegionLayout.preview.width ?? '0px'" />
+            <render-canvas ref="renderCanvasRef" class="render-canvas"
+                :style="(mainRegionLayout.canvas as CSSProperties)" :project="currentProject"
+                :currentPage="projectPreview.pageID" :width="parseInt(mainRegionLayout.canvas.width ?? '0')"
+                :height="parseInt(mainRegionLayout.canvas.height ?? '0')" :mode="userOperationMode"
+                @insert-statement="canvasInsertStatement" :platform="platform" :renderText="html2canvas" />
+            <image-manager ref="imageManagerRef" class="image-manager"
+                :style="(mainRegionLayout.image as CSSProperties)" :i18n="props.i18n" :project="currentProject"
+                :height="mainRegionLayout.image.height ?? '0px'" :width="mainRegionLayout.image.width ?? '0px'" />
+        </div>
     </div>
 
     <render-options-popup ref="renderOptionsRef" v-if="isShowRenderOptionsPopup" :i18n="props.i18n" />
@@ -33,7 +35,7 @@
     position: fixed;
     top: 0%;
     left: 0%;
-    height: 100%;
+    height: calc(100% - 8px);
     width: 100%;
     margin: 0px;
 }
@@ -53,6 +55,12 @@
 
 .image-manager {
     border-left: 2px solid purple;
+}
+
+.root {
+    margin: 0px;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 </style>
 <script lang="ts" setup>

@@ -39,11 +39,10 @@
     position: absolute;
     top: 22px;
     left: 0%;
-    width: 100%;
+    width: calc(100% - 48px);
     padding: 2px 20px;
     user-select: none;
     border-bottom: 1px solid rgb(40, 40, 40);
-    overflow-x: auto;
     overflow-y: auto;
 }
 
