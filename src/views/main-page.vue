@@ -170,7 +170,6 @@ onMounted(() => {
 });
 
 const releaseLogBox = ref<HTMLElement | null>(null);
-
 const loadComponents = () => {
     Promise.all([
 
@@ -182,10 +181,9 @@ const loadComponents = () => {
             import('monaco-editor').then(monaco => {
                 // eslint-disable-next-line @typescript-eslint/no-unused-vars
                 if (releaseLogBox.value) {
-                    monaco.editor.create(releaseLogBox.value, {
+                    const releaseContainer = monaco.editor.create(releaseLogBox.value, {
                         value: releaseLog,
                         colorDecorators: true,
-                        automaticLayout: true,
                         language: 'text',
                         theme: 'vs',
                         selectOnLineNumbers: true,
@@ -215,6 +213,16 @@ const loadComponents = () => {
                         lineNumbers: 'on'
                     });
                     isReleaseLogLoading.value = false;
+
+                    const updateEditorSize = () => {
+                        releaseContainer.layout({
+                            width: releaseLogBox.value?.offsetWidth || 0,
+                            height: window.innerHeight - (releaseLogBox.value?.getBoundingClientRect().top ?? 0) - 8
+                        });
+                    };
+
+                    window.addEventListener('resize', updateEditorSize);
+                    requestAnimationFrame(updateEditorSize);
                 }
             });
         });
