@@ -4,7 +4,8 @@
 </template>
 <script lang="ts" setup>
 import { ref, nextTick } from 'vue';
-import html2canvas, { Options } from 'html2canvas';
+import html2canvas from 'html2canvas';
+import type { Options } from 'html2canvas';
 import 'katex/dist/katex.css';
 const container = ref<HTMLDivElement>();
 

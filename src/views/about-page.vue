@@ -170,7 +170,7 @@ import { defineProps } from 'vue';
 import topBar from '@/components/top-bar.vue';
 import bottomBar from '@/components/bottom-bar.vue';
 
-import { i18nMap } from '@/i18n';
+import type { i18nMap } from '@/i18n';
 
 const props = defineProps<{
     i18n: i18nMap

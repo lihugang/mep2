@@ -94,8 +94,8 @@
 } */
 </style>
 <script lang="ts" setup>
-import Project from '@/utils/ProjectManager';
-import { i18nMap } from '@/i18n';
+import type Project from '@/utils/ProjectManager';
+import type { i18nMap } from '@/i18n';
 import { defineProps, reactive } from 'vue';
 import calcSha256WithWorker from '@/utils/calcSha256WithWorker';
 
@@ -181,6 +181,7 @@ const selectImageToAdd = () => {
 };
 
 const deleteImage = (sha256: string) => {
+    // eslint-disable-next-line vue/no-mutating-props
     delete props.project.images[sha256];
 };
 

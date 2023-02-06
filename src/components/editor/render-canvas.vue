@@ -7,13 +7,13 @@
 <script lang="ts" setup>
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { defineProps, watch, ref, reactive, defineEmits } from 'vue';
-import { Project } from '@/utils/ProjectManager';
+import type { Project } from '@/utils/ProjectManager';
 import { CodeKeyWord } from '@/utils/AST/AST.type';
 import katex from 'katex';
 import 'katex/dist/katex.css';
 import calcSha256 from 'sha256';
 // eslint-disable-next-line camelcase
-import { Options as h2c_Options } from 'html2canvas';
+import type { Options as h2c_Options } from 'html2canvas';
 
 const props = defineProps<{
     project: Project,

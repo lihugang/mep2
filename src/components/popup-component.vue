@@ -65,7 +65,7 @@
 </style>
 <script lang="ts" setup>
 import { defineExpose, reactive } from 'vue';
-import * as popup from './popup';
+import type * as popup from './popup';
 const popups: popup.task[] = reactive([]);
 defineExpose({
     registerTask: (text: string, buttons: popup.button[], onClick?: popup.task['onClick']) => {

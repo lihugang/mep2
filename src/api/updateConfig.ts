@@ -1,5 +1,5 @@
 import axios from './api.axios';
-import { config } from '@/config';
+import type { config } from '@/config';
 export default function updateConfig (config: config) {
     return new Promise<void>((resolve, reject) => {
         axios.post('/config', {

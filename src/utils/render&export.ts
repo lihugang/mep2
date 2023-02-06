@@ -1,8 +1,8 @@
-import Project from './ProjectManager';
+import type { Project } from './ProjectManager';
 import renderImage from './renderImage';
 import { PDFDocument } from 'pdf-lib';
 // eslint-disable-next-line camelcase
-import { Options as h2c_Options } from 'html2canvas';
+import type { Options as h2c_Options } from 'html2canvas';
 
 const getTimeFormat = () => {
     return new Date(

@@ -1,5 +1,5 @@
 import axios from './api.axios';
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 export type isElectron = AxiosResponse<boolean>;
 export default new Promise<boolean>((resolve, reject) => {
     axios.get('/isElectron').then((data) => {

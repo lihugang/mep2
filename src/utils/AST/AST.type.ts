@@ -1,5 +1,5 @@
 /* eslint-disable space-before-function-paren */
-import { ColorHex, rangeInImage, sha256 } from '@/utils/ProjectManager';
+import type { ColorHex, rangeInImage, sha256 } from '@/utils/ProjectManager';
 export enum CodeKeyWord {
     SET,
     TEXT,

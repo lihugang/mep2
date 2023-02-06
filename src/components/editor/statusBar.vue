@@ -1,7 +1,7 @@
 <template>
     <div class="status-bar">
         <span class="platform">
-            MEP &emsp; {{ showPlatform }}
+            {{ showPlatform }}
         </span>
         &nbsp;&nbsp;
         <span class="task-status" :style="props.statusStyle">
@@ -41,11 +41,12 @@
 }
 </style>
 <script lang="ts" setup>
-import { defineProps, ref, CSSProperties, defineExpose } from 'vue';
+import { defineProps, ref, defineExpose } from 'vue';
+import type { CSSProperties } from 'vue';
 import bowser from 'bowser';
 import isElectronPromise from '@/api/isElectron';
 import getVersion from '@/api/getVersion';
-import { i18nMap } from '@/i18n';
+import type { i18nMap } from '@/i18n';
 
 const props = defineProps<{
     i18n: i18nMap,
@@ -59,7 +60,7 @@ Promise.all([isElectronPromise, getVersion.localVersion]).then((result: [boolean
     const isElectron = result[0];
     const version = result[1];
     const browserUA = bowser.parse(window.navigator.userAgent);
-    showPlatform.value = `${isElectron ? props.i18n.app_platform : props.i18n.web_platform} ${version.join('.')} ${browserUA.os.name} ${browserUA.os.versionName} ${browserUA.browser.name} ${parseInt(browserUA.browser.version || '0')}`;
+    showPlatform.value = `MEP &emsp; ${isElectron ? props.i18n.app_platform : props.i18n.web_platform} ${version.join('.')} ${browserUA.os.name} ${browserUA.os.versionName} ${browserUA.browser.name} ${parseInt(browserUA.browser.version || '0')}`;
 });
 
 const time = ref(''); // display current time

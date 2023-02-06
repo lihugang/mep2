@@ -1,7 +1,7 @@
 import Axios from 'axios';
 const axios = Axios.create();
 axios.defaults.timeout = 5000;
-axios.defaults.baseURL = (process.env.NODE_ENV === 'production')
+axios.defaults.baseURL = import.meta.env.PROD
     ? '/api/v1'
     : 'http://localhost:10399/api/v1'; // default dev-api-server port 10399
 axios.interceptors.response.use((response) => {

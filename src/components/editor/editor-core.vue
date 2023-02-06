@@ -12,8 +12,8 @@ import * as Monaco from 'monaco-editor';
 import Project from '@/utils/ProjectManager';
 import * as IntelligentCode from '@/utils/AST/intelligent-code';
 import getClientFonts from '@/utils/getClientFonts';
-import { i18nMap } from '@/i18n';
-import { config } from '@/config';
+import type { i18nMap } from '@/i18n';
+import type { config } from '@/config';
 
 const editorID = 'e' + Math.random().toString(36).substring(3);
 const emits = defineEmits(['compileError', 'preview', 'highlight']);

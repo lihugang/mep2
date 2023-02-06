@@ -85,7 +85,7 @@ input[type=search]::selection {
 </style>
 <script lang="ts" setup>
 import { ref, reactive, defineEmits, defineProps, onMounted, watch, nextTick, toRaw } from 'vue';
-import { dropDownList } from './drop-down-list-type';
+import type { dropDownList } from './drop-down-list-type';
 const props = defineProps<{
     title: string;
     titleImage?: string;

@@ -1,4 +1,4 @@
-import { AxiosResponse } from 'axios';
-import { config } from '@/config';
+import type { AxiosResponse } from 'axios';
+import type { config } from '@/config';
 type getConfig = AxiosResponse<config>;
-export { getConfig };
+export type { getConfig };

@@ -57,9 +57,10 @@
 </style>
 <script lang="ts" setup>
 /* eslint-disable space-before-function-paren */
-import { defineAsyncComponent, defineProps, reactive, watch, ref, CSSProperties, onMounted } from 'vue';
-import { config } from '@/config';
-import { i18nMap } from '@/i18n';
+import { defineAsyncComponent, defineProps, reactive, watch, ref, onMounted } from 'vue';
+import type { CSSProperties } from 'vue';
+import type { config } from '@/config';
+import type { i18nMap } from '@/i18n';
 // import getClientFonts from '@/utils/getClientFonts';
 import { Project, Page } from '@/utils/ProjectManager';
 import { CodeKeyWord, ParseCodeError } from '@/utils/AST/AST.type';
@@ -95,11 +96,11 @@ const statusBarRef = ref<InstanceType<typeof statusBar>>();
 watch(statusBarRef, () => {
     if (statusBarRef.value) {
         const intervalID = setInterval(() => {
-            if (statusBarRef.value) {
+            if (statusBarRef.value && statusBarRef.value.showPlatform) {
                 platform.value = statusBarRef.value.showPlatform;
                 clearInterval(intervalID);
             }
-        }, 200);
+        }, 500);
         // cannot watch .showPlatform, time always change, if use watch with options deep:true, performance will be worse
     }
 });

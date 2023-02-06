@@ -110,9 +110,9 @@ option:hover {
 import { defineProps, reactive, defineEmits, defineExpose, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import dropDownList from '@/components/drop-down-list.vue';
-import { dropDownList as dropDownListType } from '@/components/drop-down-list-type';
-import { i18nMap } from '@/i18n';
-import { ElectronFile } from '@/platform/file';
+import type { dropDownList as dropDownListType } from '@/components/drop-down-list-type';
+import type { i18nMap } from '@/i18n';
+import type { ElectronFile } from '@/platform/file';
 import isElectron from '@/api/isElectron';
 import historyRecord from '@/api/getHistoryRecord';
 import requestReadfile from '@/api/requestReadFile';

@@ -1,5 +1,6 @@
-import rawAxios, { AxiosResponse } from 'axios';
-import { config } from '@/config';
+import rawAxios from 'axios';
+import type { AxiosResponse } from 'axios';
+import type { config } from '@/config';
 export type releaseLog = AxiosResponse<string>;
 export default (lang: config['language']) => new Promise<releaseLog>((resolve) => {
     rawAxios.get(`https://mep2.deta.dev/latest.releaseLog?lang=${lang}`).then(resolve).catch((err: unknown) => resolve({

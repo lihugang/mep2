@@ -66,7 +66,7 @@
                     <br /><br />
                     <hr />
                     <details>
-                        <summary>Experiment features</summary>
+                        <summary>Experimental features</summary>
                         <span class="warning">WARNING: EXPERIMENTAL FEATURES AHEAD! By enabling these features, you
                             could lose your data, compromise your security or privacy or reduce stability. Please choose
                             them after think over and over. If you have any problem about them, please contact us at <a
@@ -196,8 +196,8 @@ input::selection {
 import { defineProps, ref, reactive } from 'vue';
 import topBar from '@/components/top-bar.vue';
 import bottomBar from '@/components/bottom-bar.vue';
-import { i18nMap } from '@/i18n';
-import { config } from '@/config';
+import type { i18nMap } from '@/i18n';
+import type { config } from '@/config';
 import _ from 'lodash';
 import updateConfig from '@/api/updateConfig';
 

@@ -1,12 +1,13 @@
 /* eslint-disable indent */
 /* eslint-disable space-before-function-paren */
 import calcSha256 from './calcSha256WithWorker';
-import { CodeAST, CodeKeyWord } from '@/utils/AST/AST.type';
-import { AST2String, String2AST } from './AST/converter';
+import type { CodeAST } from '@/utils/AST/AST.type';
+import { CodeKeyWord } from '@/utils/AST/AST.type';
+import { AST2String, String2AST } from '@/utils/AST/converter';
 import * as zlib from '@/utils/zlib/index';
 import sha256 from 'sha256';
 import getClientFonts from './getClientFonts';
-import { i18nMap } from '@/i18n';
+import type { i18nMap } from '@/i18n';
 
 export type ImageBase64 = string;
 export type FontBase64 = string;
@@ -64,7 +65,7 @@ export class Page {
     screen: {
         height: number;
         width: number;
-    }
+    };
 
     constructor(code: CodeAST | string, height = -1, width = -1) {
         if (typeof code === 'string') this.code = Page.String2AST(code);

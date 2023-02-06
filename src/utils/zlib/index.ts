@@ -1,10 +1,8 @@
-import { DeflateFunctionOptions, Data } from 'pako';
+import type { DeflateFunctionOptions, Data } from 'pako';
 
-// eslint-disable-next-line import/no-webpack-loader-syntax
-import gzipWorker from 'worker-loader!./gzip.worker';
+import gzipWorker from './gzip.worker?worker';
 
-// eslint-disable-next-line import/no-webpack-loader-syntax
-import ungzipWorker from 'worker-loader!./ungzip.worker';
+import ungzipWorker from './ungzip.worker?worker';
 
 // eslint-disable-next-line space-before-function-paren
 export function gzip(data: Data | string, options?: DeflateFunctionOptions): Promise<Uint8Array> {

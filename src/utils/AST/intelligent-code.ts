@@ -1,10 +1,10 @@
 /* eslint-disable space-before-function-paren */
-import { i18nMap } from '@/i18n';
+import type { i18nMap } from '@/i18n';
 import * as Monaco from 'monaco-editor';
-import Project, { Page } from '../ProjectManager';
-import { Ref } from 'vue';
+import type { Project, Page } from '../ProjectManager';
+import type { Ref } from 'vue';
 import { ParseCodeError, CodeKeyWord } from './AST.type';
-import { config } from '@/config';
+import type { config } from '@/config';
 
 export function registerLanguage() {
     Monaco.languages.register({
@@ -521,7 +521,7 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                     });
                 }
             }
-        } catch { }
+        } catch { /* catch */ }
     });
     return markers;
 }

@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-webpack-loader-syntax
-import Worker from 'worker-loader!./calcSha256.worker';
+import Worker from './calcSha256.worker?worker';
 export default function calcSha256WithWorker (s: string) {
     return new Promise<string>((resolve) => {
         const worker = new Worker();

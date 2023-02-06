@@ -1,6 +1,6 @@
 <template>
     <div class="top-bar">
-        <img src="../../public/assets/logo.png" height="48" width="48" title="MEP-logo" class="logo" />
+        <img src="/assets/logo.png" height="48" width="48" title="MEP-logo" class="logo" />
         <span style="user-select: none">&nbsp;</span>
         <span class="software-title">
             The <span class="red">M</span>ath <span class="red">E</span>ditor For <span class="red">P</span>hotos<span

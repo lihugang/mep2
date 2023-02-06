@@ -1,7 +1,7 @@
 /* eslint-disable space-before-function-paren */
-import { config } from '@/config';
-import _html2canvas, { Options } from 'html2canvas';
-
+import type { config } from '@/config';
+import _html2canvas from 'html2canvas';
+import type { Options } from 'html2canvas';
 export function sleep(ms: number) {
     return new Promise<void>(resolve => setTimeout(resolve, ms));
 }
@@ -48,6 +48,7 @@ export default function html2canvasFactory(config: config) {
                 item.window && item.window.close();
             });
         }); // close sub windows when main window exit
+        // eslint-disable-next-line no-inner-declarations
         function html2canvas(element: HTMLElement, options?: Partial<Options>, width?: number, height?: number): Promise<string> {
             const isLogging = (process.env.NODE_ENV === 'production')
                 ? (options?.logging ?? false)

@@ -1,5 +1,5 @@
 import axios from './api.axios';
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
 export type historyRecord = AxiosResponse<string[]>;
 export default new Promise<string[]>((resolve, reject) => {
     axios.get('/history').then((data) => {

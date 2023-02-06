@@ -72,7 +72,7 @@ input[type=checkbox] {
 </style>
 <script lang="ts" setup>
 import { defineProps, defineExpose, ref } from 'vue';
-import { i18nMap } from '@/i18n';
+import type { i18nMap } from '@/i18n';
 import getIsElectron from '@/api/isElectron';
 const props = defineProps<{
     i18n: i18nMap

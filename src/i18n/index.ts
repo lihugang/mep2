@@ -1,8 +1,8 @@
 /* eslint-disable indent */
 // I don't know why eslint indent goes wrong with switch statement
-import { config } from '@/config';
+import type { config } from '@/config';
 type i18nMap = (typeof import('./en-US'))['default'];
-export { i18nMap };
+export type { i18nMap };
 export default (language: config['language']): Promise<i18nMap> => {
     // return import(`./${language}`);
     // do not use string template & dynamic import, the return type will be inferred as any

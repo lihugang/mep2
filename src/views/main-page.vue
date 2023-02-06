@@ -114,8 +114,8 @@ import topBar from '@/components/top-bar.vue';
 import bottomBar from '@/components/bottom-bar.vue';
 import popupComponent from '@/components/popup-component.vue';
 import isElectron from '@/api/isElectron';
-import { i18nMap } from '@/i18n';
-import { config } from '@/config';
+import type { i18nMap } from '@/i18n';
+import type { config } from '@/config';
 
 const props = defineProps<{
     config: config,

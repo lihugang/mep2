@@ -1,12 +1,13 @@
 /* eslint-disable space-before-function-paren */
-import { Project } from '@/utils/ProjectManager';
+import type { Project } from '@/utils/ProjectManager';
 // eslint-disable-next-line camelcase
-import { Options as h2c_Options } from 'html2canvas';
+import type { Options as h2c_Options } from 'html2canvas';
 import katex from 'katex';
 import _ from 'lodash';
 import calcSha256WithWorker from './calcSha256WithWorker';
 
-import { CodeAST, CodeKeyWord, ParseCodeError } from './AST/AST.type';
+import type { CodeAST } from './AST/AST.type';
+import { CodeKeyWord, ParseCodeError } from './AST/AST.type';
 import { toRaw } from 'vue';
 
 // eslint-disable-next-line camelcase

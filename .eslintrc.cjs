@@ -1,15 +1,15 @@
+/* eslint-env node */
+require('@rushstack/eslint-patch/modern-module-resolution');
+
 module.exports = {
     root: true,
-    env: {
-        node: true
-    },
-    extends: [
+    'extends': [
         'plugin:vue/vue3-essential',
-        '@vue/standard',
-        '@vue/typescript/recommended'
+        'eslint:recommended',
+        '@vue/eslint-config-typescript'
     ],
     parserOptions: {
-        ecmaVersion: 2020
+        ecmaVersion: 'latest'
     },
     rules: {
         'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
@@ -17,19 +17,10 @@ module.exports = {
         semi: ['error', 'always'],
         'no-var': 'error',
         'no-eval': 'error',
-        indent: ['warn', 4],
+        indent: ['warn', 4, {
+            SwitchCase: 1
+        }],
         'linebreak-style': ['error', 'unix'],
         'func-call-spacing': ['warn', 'never']
     },
-    overrides: [
-        {
-            files: [
-                '**/__tests__/*.{j,t}s?(x)',
-                '**/tests/unit/**/*.spec.{j,t}s?(x)'
-            ],
-            env: {
-                jest: true
-            }
-        }
-    ]
 };

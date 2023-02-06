@@ -8,11 +8,12 @@
 </template>
 
 <script lang="ts" setup>
-import { config } from '@/config';
+import type { config } from '@/config';
 import { ref, reactive } from 'vue';
 import axios from '@/api/api.axios';
-import { getConfig } from '@/api/getConfig';
-import i18n, { i18nMap } from '@/i18n';
+import type { getConfig } from '@/api/getConfig';
+import i18n from '@/i18n';
+import type { i18nMap } from '@/i18n';
 const isConfigLoaded = ref(false);
 const userConfig = reactive<config>({
     fontFamily: '',

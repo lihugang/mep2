@@ -1,5 +1,6 @@
 import axios from './api.axios';
-import rawAxios, { AxiosResponse } from 'axios';
+import rawAxios from 'axios';
+import type { AxiosResponse } from 'axios';
 export type version = AxiosResponse<[number, number, number]>;
 export default {
     localVersion: new Promise<version['data']>((resolve, reject) => {
