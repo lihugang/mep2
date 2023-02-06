@@ -14,6 +14,7 @@ PRs: ![](https://img.shields.io/github/issues-pr/lihugang/mep2) ![](https://img.
 - Support import images, support many image formats
 - Have web-platform version
 - Support Progressive Web Applications
+- Built with `vite`, it's like lightning.
 # TODO
 - Support version controls (like `git`)
 - Support file transfer and collaborative editing
