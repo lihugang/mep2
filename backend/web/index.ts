@@ -25,7 +25,7 @@ const config: {
 app.use('/api/v1', (() => {
     const router = express.Router();
     router.all('*', (req, res, next) => {
-        res.set('access-control-allow-origin', 'http://localhost:8080').set('access-control-allow-method', 'GET, POST, OPTIONS').set('access-control-allow-headers', 'content-type, content-length').set('access-control-max-age', (0x3f3f3f3f).toString());
+        res.set('access-control-allow-origin', 'http://localhost:5173').set('access-control-allow-method', 'GET, POST, OPTIONS').set('access-control-allow-headers', 'content-type, content-length').set('access-control-max-age', (0x3f3f3f3f).toString());
         if (req.method === 'OPTIONS') return res.status(204).json({});
 
         router.get('/config', (req, res) => {
