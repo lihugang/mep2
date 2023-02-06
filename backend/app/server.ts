@@ -122,12 +122,13 @@ export default function startServer(config: {
                     filename = await (await fetch(`https://mep2.deta.dev/latest.filename?platform=${process.platform}&arch=${process.arch}`)).text();
                 } catch {
                     dialog('Failed to connect to download server, please visit please visit https://mep2.deta.dev/download to download and install it manually.');
+                    return;
                 }
                 const downloadStream = download(`https://mep2.deta.dev/latest?platform=${process.platform}&arch=${process.arch}`);
                 downloadStream.pipe(writeStream);
                 downloadStream.catch(() => {
                     dialog('Failed to download the latest installer, please visit https://mep2.deta.dev/download to download and install it manually.');
-                    destroyElectron();
+                    return;
                 });
                 writeStream.on('close', () => {
                     const writeStream = fs.createWriteStream(pathLib.join(os.homedir(), filename), {
