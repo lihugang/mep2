@@ -124,43 +124,6 @@ watch(projectPreview, () => {
     }
 }); // when page switches, tell toolbar to show
 
-const loadingFonts = () => {
-    currentStatus.text = '';
-    // getClientFonts.then(fonts => {
-    //     const loadCount = ref(0);
-    //     function load() {
-    //         if (!fonts[loadCount.value]) return;
-    //         const font = fonts[loadCount.value];
-    //         font.blob().then(blob => {
-    //             const url = URL.createObjectURL(blob);
-    //             const fontFace = new FontFace(`${font.fullName}--${props.i18n.local}`, `url("${url}")`);
-    //             document.fonts.add(fontFace);
-    //             fontFace.load().then(() => {
-    //                 loadCount.value++;
-    //                 return load();
-    //             }).catch((err) => {
-    //                 console.error(err);
-    //                 loadCount.value++;
-    //                 return load();
-    //             });
-    //         });
-    //     }
-    //     load(); load(); load(); load();
-    //     watch(loadCount, () => {
-    //         if (loadCount.value >= fonts.length) {
-    //             // all fonts loaded
-    //             currentStatus.text = '';
-    //         }
-    //     });
-    //     const showProgress = () => {
-    //         if (loadCount.value >= fonts.length) return;
-    //         currentStatus.text = `${props.i18n.loading_fonts} (${loadCount.value} / ${fonts.length})`;
-    //         requestAnimationFrame(showProgress);
-    //     };
-    //     showProgress();
-    // });
-};
-
 const currentProject = ref(new Project());
 currentProject.value.pages[0] = new Page('set canvas 4096 2304'); // default canvas size 4096x2304 (4k 16:9)
 
@@ -453,8 +416,8 @@ watch([projectPreviewBarRef, statusBarRef, pageConfig, editorCoreRef, renderPrev
         if (!value[i]) isAllLoaded = false;
     }
     if (isAllLoaded) {
-        currentStatus.text = props.i18n.loading_fonts + ' (0 / Unknown)';
-        loadingFonts();
+        // no display loading fonts
+        currentStatus.text = '';
     }
 });
 
@@ -469,7 +432,7 @@ const onSave = () => {
         if (!isEmitWatch && saveOptionsRef.value) {
             isEmitWatch = true;
             saveOptionsRef.value.onUserConfirm = (author: string, compressed: boolean, keepCache: boolean, embedFonts: boolean) => {
-                currentProject.value.save(author, compressed, keepCache, embedFonts, props.i18n);
+                currentProject.value.save(author, compressed, keepCache, embedFonts);
             };
             saveOptionsRef.value.onUserCancel = () => {
                 isShowSaveOptionsPopup.value = false;

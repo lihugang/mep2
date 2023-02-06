@@ -293,7 +293,7 @@ export class Project {
         });
     }
 
-    async save(author: string, compressed: boolean, keepCache: boolean, embedFonts: boolean, i18n: i18nMap) {
+    async save(author: string, compressed: boolean, keepCache: boolean, embedFonts: boolean) {
         const json: v2Format = {
             author: author,
             editTime: new Date().getTime(),
