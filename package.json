@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "vite",
-        "build": "run-p type-check build-only && node compress.cjs",
+        "build": "run-p type-check build-only",
         "preview": "vite preview",
         "build-only": "vite build && node compress.cjs",
         "type-check": "vue-tsc --noEmit",
