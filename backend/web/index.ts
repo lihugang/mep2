@@ -112,7 +112,9 @@ app.all('*', (req, res) => {
                                         ? 'fonts/ttf'
                                         : path.endsWith('.pdf')
                                             ? 'application/pdf'
-                                            : 'application/octet-stream';
+                                            : path.endsWith('.webmanifest')
+                                                ? 'application/manifest+json'
+                                                : 'application/octet-stream';
         if (req.headers['accept-encoding']?.includes('br')) {
             if (fs.existsSync(path + '.br') && fs.statSync(path + '.br').isFile()) {
                 res.set('content-encoding', 'br').set('content-type', contentType).set('cache-control', 'public, max-age=86400');

@@ -17,7 +17,7 @@
                 <div class="about-container" :style="{
                     height: innerHeight - 200 + 'px'
                 }">
-                    MEP Version 2.0.1 <img height="32" width="32" src="../../public/img/icons/logo.png" title="logo">
+                    MEP Version 2.0.1 <img height="32" width="32" src="/logo.png" title="logo">
                     <br />
                     Release Time: 01-31-2023 <br />
                     Official website: <a href="https://mep2.deta.dev">mep2.deta.dev</a> <br />

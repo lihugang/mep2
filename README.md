@@ -13,11 +13,10 @@ PRs: ![](https://img.shields.io/github/issues-pr/lihugang/mep2) ![](https://img.
 - Exports support .png & .pdf
 - Support import images, support many image formats
 - Have web-platform version
+- Support Progressive Web Applications
 # TODO
 - Support version controls (like `git`)
 - Support file transfer and collaborative editing
-- Import the performance of `html2canvas` (text&LaTeX to image)
-- PWA Support
 - Lite functions for mobile side
 - - -
 For further information, please read `docs/index.md` or <https://mep2.deta.dev/documentation>

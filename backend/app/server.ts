@@ -9,7 +9,7 @@ import * as os from 'os';
 import * as download from 'download';
 import fetch from 'node-fetch';
 
-export default function startServer (config: {
+export default function startServer(config: {
     port: number
 }, destroyElectron: () => void, dialog: (str: string) => void) {
     const app = express();
@@ -172,7 +172,9 @@ export default function startServer (config: {
                                             ? 'fonts/ttf'
                                             : path.endsWith('.pdf')
                                                 ? 'application/pdf'
-                                                : 'application/octet-stream';
+                                                : path.endsWith('.webmanifest')
+                                                    ? 'application/manifest+json'
+                                                    : 'application/octet-stream';
             if (req.headers['accept-encoding']?.includes('br')) {
                 if (fs.existsSync(path + '.br') && fs.statSync(path + '.br').isFile()) {
                     res.set('content-encoding', 'br').set('content-type', contentType).set('cache-control', 'public, max-age=86400');
