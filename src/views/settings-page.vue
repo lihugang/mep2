@@ -28,6 +28,29 @@
                     {{ props.i18n.font_family }}: <input type="text" maxlength="128"
                         v-model="customConfig.fontFamily" /><br />
                     <br />
+                    <template v-if="isAPP">
+                        <!--Only APP-->
+                        <div class="experiment-container">
+                            <strong>{{ props.i18n.check_update }}</strong> <span class="button"
+                                @click="customConfig.update.checkForUpdate = !customConfig.update.checkForUpdate"><template
+                                    v-if="customConfig.update.checkForUpdate">{{
+                                        props.i18n.enabled
+                                    }}</template><template v-else>{{ props.i18n.disabled }}</template> </span>
+                            <br />
+                            {{ props.i18n.check_update_details }}
+                        </div>
+                        <div class="experiment-container" v-if="customConfig.update.checkForUpdate">
+                            <strong>{{ props.i18n.auto_update }}</strong> <span class="button"
+                                @click="customConfig.update.autoUpdate = !customConfig.update.autoUpdate"><template
+                                    v-if="customConfig.update.autoUpdate">{{
+                                        props.i18n.enabled
+                                    }}</template><template v-else>{{ props.i18n.disabled }}</template> </span>
+                            <br />
+                            {{ props.i18n.auto_update_details }}
+                        </div>
+                        <br />
+                        <br />
+                    </template>
                     {{ props.i18n.snippets }}<br />
                     <table border="1">
                         <tbody>
@@ -199,6 +222,7 @@ import type { i18nMap } from '@/i18n';
 import type { config } from '@/config';
 import _ from 'lodash';
 import updateConfig from '@/api/updateConfig';
+import isElectron from '@/api/isElectron';
 
 const props = defineProps<{
     config: config,
@@ -231,4 +255,7 @@ const windowHeight = ref(window.innerHeight);
 window.addEventListener('resize', () => {
     windowHeight.value = window.innerHeight;
 });
+
+const isAPP = ref(true);
+isElectron.then(value => isAPP.value = value);
 </script>

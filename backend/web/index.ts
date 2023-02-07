@@ -42,6 +42,10 @@ app.use('/api/v1', (() => {
                         enable: false,
                         counts: 2
                     }
+                },
+                update: {
+                    checkForUpdate: true,
+                    autoUpdate: true
                 }
             };
             try {

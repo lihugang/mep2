@@ -135,27 +135,38 @@ onMounted(() => {
     isElectron.then(isElectron => {
         if (isElectron) {
             // electron, check for updates
-            import('../api/getVersion').then(getVersion => getVersion.default).then(getVersion => {
-                Promise.all(
-                    [
-                        getVersion.localVersion,
-                        getVersion.latestVersion
-                    ]
-                ).then(version => {
-                    if (
-                        JSON.stringify(version[0]) ===
-                        JSON.stringify(version[1])
-                        // stringify version arraies, compare whether they fits, the comparison between objects are comparing their memory addresses, not values
-                    ) {
-                        // version equals
+            if (props.config.update.checkForUpdate) {
+                import('../api/getVersion').then(getVersion => getVersion.default).then(getVersion => {
+                    Promise.all(
+                        [
+                            getVersion.localVersion,
+                            getVersion.latestVersion
+                        ]
+                    ).then(version => {
+                        if (
+                            JSON.stringify(version[0]) ===
+                            JSON.stringify(version[1])
+                            // stringify version arraies, compare whether they fits, the comparison between objects are comparing their memory addresses, not values
+                        ) {
+                            // version equals
+                            return loadComponents();
+                        } else {
+                            // update to the latest version
+                            if (props.config.update.autoUpdate) {
+                                import('../api/updateVersion').then(updateVersion => updateVersion.default());
+                                loadingDisplayWords.value = props.i18n.update_version;
+                            } else {
+                                alert(props.i18n.template('detect_a_new_version', {
+                                    version: version[1].join('.')
+                                }));
+                                return loadComponents();
+                            }
+                        }
+                    }).catch(() => {
                         return loadComponents();
-                    } else {
-                        // update to the latest version
-                        import('../api/updateVersion').then(updateVersion => updateVersion.default());
-                        loadingDisplayWords.value = props.i18n.update_version;
-                    }
-                });
-            });
+                    });
+                }).catch(() => loadComponents());
+            } else return loadComponents();
         } else {
             requestIdleCallback(() => {
                 // when browser idle, notice user he/she is using web platform, some function may be disabled, suggest he/she installing app

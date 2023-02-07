@@ -26,7 +26,7 @@
                     Contributor: <a href="https://github.com/lihugang">lihugang</a> <br />
                     Sponsor: none <br />
                     <hr />
-                    Here are the fonts and libraries we use, thank their developer. <br />
+                    Here are the fonts and libraries we use, thank their developers. <br />
                     Fonts: <ul>
                         <li>
                             <a href="/fonts.google.noto.sans.light.license.txt" target="_blank">Noto Sans Light</a>

@@ -224,5 +224,10 @@ export default {
     start_location: 'Starting location',
     end_location: 'Ending location',
     color_must_be_hex: 'The color must be a hexadecimal string with six characters.',
-    font_cannot_find: 'We couldn\'t find font "[[ name ]]" in your computer.'
+    font_cannot_find: 'We couldn\'t find font "[[ name ]]" in your computer.',
+    auto_update: 'Automatically update',
+    auto_update_details: 'We\'ll download the latest release of MEP2 from GitHub and store it in your home directory, because of platform limits, you need to install it manually.',
+    check_update: 'Check for update',
+    check_update_details: 'We\'ll connect to the server (mep2.deta.dev) to check for updates.',
+    detect_a_new_version: 'We detected a new version [[ version ]] of MEP2, please visit https://mep2.deta.dev/download to download it.'
 };

@@ -15,4 +15,8 @@ export interface config {
             counts: number;
         }
     }
+    update: {
+        checkForUpdate: boolean;
+        autoUpdate: boolean;
+    }
 }

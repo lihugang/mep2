@@ -38,6 +38,10 @@ export default function startServer(config: {
                             enable: false,
                             counts: 2
                         }
+                    },
+                    update: {
+                        checkForUpdate: true,
+                        autoUpdate: true
                     }
                 };
                 try {

@@ -224,5 +224,10 @@ export default {
     start_location: '开始位置的',
     end_location: '结束位置的',
     color_must_be_hex: '颜色必须是六个字符长度的十六进制数',
-    font_cannot_find: '在您的电脑上无法找到字体"[[ name ]]"'
+    font_cannot_find: '在您的电脑上无法找到字体"[[ name ]]"',
+    auto_update: '自动更新',
+    auto_update_details: '我们会从GitHub上下载MEP2的最新版本然后在您的用户目录储存，由于平台限制，你需要手动安装。',
+    check_update: '检查更新',
+    check_update_details: '我们会连接到服务器(mep2.deta.dev)以检查更新。',
+    detect_a_new_version: '我们检测到MEP2有新版本 [[ version ]]，请访问 https://mep2.deta.dev/download 下载。'
 };
