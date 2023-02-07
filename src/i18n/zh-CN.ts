@@ -10,7 +10,7 @@ export default {
     version: '版本',
     confirm: '确认',
     cancel: '取消',
-    web_side_notification: 'We have detected that you are using this service through the web platform. Due to browser restrictions, some functions may be limited or not work properly. We recommend that you should install the client (visit https://mep2.deta.dev/download) or replace or upgrade your browser to the latest version of Google Chrome (visit https://www.google.com/chrome to download, for users in mainland China, please visit https://www.google.cn/chrome)',
+    web_side_notification: '我们检测到您正在通过网页使用这项服务。由于浏览器限制，一些功能可能被限制或不能正常工作。我们建议您安装客户端 (访问 https://mep2.deta.dev/download) 或者将您的浏览器更换或更新到Google Chrome的最新版本。(访问 https://www.google.com/chrome 下载，如果您在中国大陆地区，请访问 https://www.google.cn/chrome)',
     settings: '设置',
     untitled: '未命名',
     web_platform: '网页',
