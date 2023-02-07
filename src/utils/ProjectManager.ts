@@ -147,20 +147,20 @@ export class Project {
             return Project.loadFromV1(file) as Promise<Project>;
         } else if (file.name.endsWith('.im2')) {
             return Project.loadFromV2(file) as Promise<Project>;
-        } else return Promise.reject(new InvalidFormatError('Bad file format.'));
+        } else return Promise.reject(new InvalidFormatError(window.i18n.bad_file_format));
     }
 
     private static loadFromV1(file: File) {
         return new Promise((resolve, reject) => {
             const reader = new FileReader();
             reader.readAsText(file);
-            reader.onerror = () => reject(new UnknownError('Failed to read file'));
+            reader.onerror = () => reject(new UnknownError(window.i18n.failed_to_read_file));
             reader.onload = () => {
                 let content: null | v1Format = null;
                 try {
                     content = JSON.parse(reader.result as string);
                 } catch {
-                    return reject(new InvalidFormatError('Failed to parse json: format v1'));
+                    return reject(new InvalidFormatError(`${window.i18n.failed_to_parse_json}: ${window.i18n.format_lc} v1`));
                 }
                 if (content) {
                     const project = new Project();
@@ -232,10 +232,12 @@ export class Project {
                                 }
                             };
                         } else {
-                            reject(new Error(`Failed to recognize version ${version.join('.')}. Check whether your software is up to date.`));
+                            reject(new Error(window.i18n.template('failed_to_recoginize_version', {
+                                version: version.join('.')
+                            })));
                         }
                     } else {
-                        reject(new Error('Invalid file format'));
+                        reject(new Error(window.i18n.bad_file_format));
                     }
                 }
             };
@@ -248,13 +250,13 @@ export class Project {
             // TODO unzip gzip
             const reader = new FileReader();
             reader.readAsText(blob);
-            reader.onerror = () => reject(new UnknownError('Failed to read file'));
+            reader.onerror = () => reject(new UnknownError(window.i18n.failed_to_read_file));
             reader.onload = () => {
                 let content: null | v2Format = null;
                 try {
                     content = JSON.parse(reader.result as string);
                 } catch {
-                    return reject(new InvalidFormatError('Failed to parse json: format v2.0.0'));
+                    return reject(new InvalidFormatError(`${window.i18n.failed_to_parse_json}: ${window.i18n.format_lc} v2.0.0`));
                 }
                 if (content) {
                     const project = new Project();

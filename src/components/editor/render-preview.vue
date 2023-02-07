@@ -9,12 +9,12 @@
         <div class="preview-font-size" v-show="display.type === 'render-font-size'" :style="{
             fontSize: ((display.size ?? 14) / (display.canvasHeight ?? 2304) * (renderPreviewRef?.offsetHeight ?? 200)) + 'px'
         }" :size="display.size" :real-height="display.canvasHeight" :container-height="renderPreviewRef?.offsetHeight">
-            Font Size: {{ display.size }}px
+            {{ props.i18n.font_size }}: {{ display.size }}px
         </div>
         <div class="preview-font-family" v-show="display.type === 'render-font-family'" :style="{
             fontFamily: display.fontFamily || 'Noto Sans Light'
         }">
-            Font Family: {{ display.fontFamily }}
+            {{ props.i18n.font_family }}: {{ display.fontFamily }}
         </div>
         <div class="LaTeX-preview" v-show="display.type === 'render-LaTeX'" :LaTeX="display.LaTeX">
             <div :style="{
@@ -54,6 +54,9 @@ img {
 </style>
 <script lang="ts" setup>
 import { reactive, defineExpose, ref, watch, defineProps } from 'vue';
+
+import type { i18nMap } from '@/i18n';
+
 import katex from 'katex';
 import 'katex/dist/katex.css';
 interface displayT {
@@ -104,5 +107,6 @@ watch(display, () => {
 const props = defineProps<{
     height: string;
     width: string;
+    i18n: i18nMap
 }>();
 </script>

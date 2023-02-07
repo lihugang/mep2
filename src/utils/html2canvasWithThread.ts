@@ -41,7 +41,7 @@ export default function html2canvasFactory(config: config) {
                 threadPool[id].window = null;
             });
         }
-        if (threadPool.map(item => item.window).includes(null)) alert('Failed to pop render thread window, please allow them in your browser settings, and restart this page.');
+        if (threadPool.map(item => item.window).includes(null)) alert(window.i18n.failed_to_pop_up_render_thread_window);
 
         window.addEventListener('beforeunload', () => {
             threadPool.forEach(item => {
@@ -99,7 +99,7 @@ export default function html2canvasFactory(config: config) {
                         }>) => {
                             if (event.data.target === 'main' && event.data.id === opsID) {
                                 thread.mq.shift();
-                                console.log('Receive message from remote', event.data);
+                                isLogging && console.log('Receive message from remote', event.data);
                                 thread.window?.removeEventListener('message', onMessageReceive);
                                 resolve(event.data.data);
                             }

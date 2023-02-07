@@ -106,7 +106,7 @@
                 </div>
             </div>
         </view>
-        <bottom-bar></bottom-bar>
+        <bottom-bar :i18n="props.i18n"></bottom-bar>
     </div>
 </template>
 <style scoped>

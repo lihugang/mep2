@@ -66,29 +66,28 @@
                     <br /><br />
                     <hr />
                     <details>
-                        <summary>Experimental features</summary>
-                        <span class="warning">WARNING: EXPERIMENTAL FEATURES AHEAD! By enabling these features, you
-                            could lose your data, compromise your security or privacy or reduce stability. Please choose
-                            them after think over and over. If you have any problem about them, please contact us at <a
+                        <summary>{{ props.i18n.experimental_features }}</summary>
+                        <span class="warning">{{ props.i18n.experimental_features_warning }}<a
                                 href="https://github.com/lihugang/mep2/issues"
                                 target="_blank">https://github.com/lihugang/mep2/issues</a></span>
                         <hr />
                         <div class="experiment-container">
-                            <strong>Render thread pool</strong> <span class="button"
+                            <strong>{{ props.i18n.exp_render_thread_pool }}</strong> <span class="button"
                                 @click="customConfig.experiments.renderThreadPool.enable = !customConfig.experiments.renderThreadPool.enable"><template
-                                    v-if="customConfig.experiments.renderThreadPool.enable">Enabled</template><template
-                                    v-else>Disabled</template> </span>
+                                    v-if="customConfig.experiments.renderThreadPool.enable">{{
+                                        props.i18n.enabled
+                                    }}</template><template v-else>{{ props.i18n.disabled }}</template> </span>
                             <br />
-                            Use a thread(window) pool to convert text to images and make easier to render them in
-                            canvas. It will pop up a set of windows, may be banned by browser, please allow this action
-                            if you enable this. For further information, please see <a
-                                href="https://github.com/lihugang/mep2/issues/1" target="_blank">Issue/1</a>
+                            {{ props.i18n.exp_render_thread_pool_details }}<a
+                                href="https://github.com/lihugang/mep2/issues/1" target="_blank">{{
+                                    props.i18n.issue
+                                }}/1</a>
                         </div>
                         <div class="experiment-container" v-if="customConfig.experiments.renderThreadPool.enable">
-                            <strong>Render thread pool / thread counts</strong> &nbsp;
+                            <strong>{{ props.i18n.exp_render_thread_pool_thread_count }}</strong> &nbsp;
                             <input type="number" v-model="customConfig.experiments.renderThreadPool.counts" min="1"
                                 max="32" /> <br />
-                            The count of threads in the rendering thread pool.
+                            {{ props.i18n.exp_render_thread_pool_thread_count_details }}
                         </div>
 
                     </details>
@@ -98,7 +97,7 @@
                 </div>
             </div>
         </view>
-        <bottom-bar></bottom-bar>
+        <bottom-bar :i18n="props.i18n"></bottom-bar>
     </div>
 </template>
 <style scoped>

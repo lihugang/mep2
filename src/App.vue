@@ -37,6 +37,8 @@ const i18nData = reactive<{
     data: null
 });
 
+window.i18n = {} as i18nMap;
+
 document.addEventListener('DOMContentLoaded', () => {
     axios.get('/config').then((response: getConfig) => {
         if (!response.ok) throw response;
@@ -49,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             i18nData.data = value;
             // i18n loaded, finished setup, load page
             isConfigLoaded.value = true;
+            window.i18n = value;
         }).catch(err => {
             console.error(err);
             alert('Failed to load i18n map, please reload the page and try again.');

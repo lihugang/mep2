@@ -60,7 +60,7 @@ Promise.all([isElectronPromise, getVersion.localVersion]).then((result: [boolean
     const isElectron = result[0];
     const version = result[1];
     const browserUA = bowser.parse(window.navigator.userAgent);
-    showPlatform.value = `MEP &emsp; ${isElectron ? props.i18n.app_platform : props.i18n.web_platform} ${version.join('.')} ${browserUA.os.name} ${browserUA.os.versionName} ${browserUA.browser.name} ${parseInt(browserUA.browser.version || '0')}`;
+    showPlatform.value = `MEP ${isElectron ? props.i18n.app_platform : props.i18n.web_platform} ${version.join('.')} ${browserUA.os.name} ${browserUA.os.versionName} ${browserUA.browser.name} ${parseInt(browserUA.browser.version || '0')}`;
 });
 
 const time = ref(''); // display current time

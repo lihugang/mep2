@@ -116,8 +116,12 @@ function String2AST(code: string): CodeAST {
                         {
                             const width = parseInt(tokens[2]);
                             const height = parseInt(tokens[3]);
-                            if (Number.isNaN(width)) throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, 'width is a positive integer.');
-                            if (Number.isNaN(height)) throw new ParseCodeError(row, getErrorColumn(tokens, 3), statement, 'height is a positive integer.');
+                            if (Number.isNaN(width)) throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, window.i18n.template('x_is_a_positive_integer', {
+                                name: window.i18n.width_lc
+                            }));
+                            if (Number.isNaN(height)) throw new ParseCodeError(row, getErrorColumn(tokens, 3), statement, window.i18n.template('x_is_a_positive_integer', {
+                                name: window.i18n.height_lc
+                            }));
 
                             ast.push({
                                 type: CodeKeyWord.SET,
@@ -137,7 +141,9 @@ function String2AST(code: string): CodeAST {
                     case 'size':
                         {
                             const size = parseInt(tokens[2]);
-                            if (Number.isNaN(size)) throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, 'size is a positive integer.');
+                            if (Number.isNaN(size)) throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, window.i18n.template('x_is_a_positive_integer', {
+                                name: window.i18n.size
+                            }));
 
                             ast.push({
                                 type: CodeKeyWord.SET,
@@ -173,8 +179,12 @@ function String2AST(code: string): CodeAST {
                         {
                             const x = parseInt(tokens[2]);
                             const y = parseInt(tokens[3]);
-                            if (Number.isNaN(x)) throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, 'x is a positive integer.');
-                            if (Number.isNaN(y)) throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, 'y is a positive integer.');
+                            if (Number.isNaN(x)) throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, window.i18n.template('x_is_a_positive_integer', {
+                                name: 'x'
+                            }));
+                            if (Number.isNaN(y)) throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, window.i18n.template('x_is_a_positive_integer', {
+                                name: 'y'
+                            }));
 
                             ast.push({
                                 type: CodeKeyWord.TEXT,
@@ -189,8 +199,12 @@ function String2AST(code: string): CodeAST {
                         {
                             const x = parseFloat(tokens[2]);
                             const y = parseFloat(tokens[3]);
-                            if (Number.isNaN(x)) throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, 'x is a float between 0 and 1.');
-                            if (Number.isNaN(y)) throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, 'y is a float between 0 and 1.');
+                            if (Number.isNaN(x)) throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, window.i18n.template('x_is_a_float_between_0_and_1', {
+                                name: 'x'
+                            }));
+                            if (Number.isNaN(y)) throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, window.i18n.template('x_is_a_float_between_0_and_1', {
+                                name: 'y'
+                            }));
 
                             ast.push({
                                 type: CodeKeyWord.TEXT,
@@ -225,8 +239,12 @@ function String2AST(code: string): CodeAST {
                         if (tokens[4] === 'abs') {
                             const width = parseInt(tokens[5]);
                             const height = parseInt(tokens[6]);
-                            if (Number.isNaN(width)) throw new ParseCodeError(row, getErrorColumn(tokens, 5), statement, 'width is a positive integer.');
-                            if (Number.isNaN(height)) throw new ParseCodeError(row, getErrorColumn(tokens, 6), statement, 'height is a positive integer.');
+                            if (Number.isNaN(width)) throw new ParseCodeError(row, getErrorColumn(tokens, 5), statement, window.i18n.template('x_is_a_positive_integer', {
+                                name: window.i18n.width_lc
+                            }));
+                            if (Number.isNaN(height)) throw new ParseCodeError(row, getErrorColumn(tokens, 6), statement, window.i18n.template('x_is_a_positive_integer', {
+                                name: window.i18n.height_lc
+                            }));
                             ast.push({
                                 type: CodeKeyWord.IMAGE,
                                 method: CodeKeyWord.ABS,
@@ -239,8 +257,12 @@ function String2AST(code: string): CodeAST {
                         } else if (tokens[4] === 'rwd') {
                             const width = parseFloat(tokens[5]);
                             const height = parseFloat(tokens[6]);
-                            if (Number.isNaN(width)) throw new ParseCodeError(row, getErrorColumn(tokens, 5), statement, 'width is a float between 0 and 1.');
-                            if (Number.isNaN(height)) throw new ParseCodeError(row, getErrorColumn(tokens, 6), statement, 'height is a float between 0 and 1.');
+                            if (Number.isNaN(width)) throw new ParseCodeError(row, getErrorColumn(tokens, 5), statement, window.i18n.template('x_is_a_float_between_0_and_1', {
+                                name: window.i18n.width_lc
+                            }));
+                            if (Number.isNaN(height)) throw new ParseCodeError(row, getErrorColumn(tokens, 6), statement, window.i18n.template('x_is_a_float_between_0_and_1', {
+                                name: window.i18n.width_lc
+                            }));
                             ast.push({
                                 type: CodeKeyWord.IMAGE,
                                 method: CodeKeyWord.ABS,
@@ -253,7 +275,7 @@ function String2AST(code: string): CodeAST {
                         }
                     }
 
-                    if (!isSolved) throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, 'Overload error, please see the documentation.');
+                    if (!isSolved) throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, window.i18n.overload_error_please_read_the_documentation);
                 } else if (tokens.length === 10) {
                     // image abs/rwd sha256 at x y resize abs/rwd w h
                     const method = (tokens[1] === 'abs')
@@ -266,8 +288,12 @@ function String2AST(code: string): CodeAST {
                     if (tokens[3] !== 'at') throw new ParseCodeError(row, getErrorColumn(tokens, 3), statement, 'at');
                     const x = parseFloat(tokens[4]);
                     const y = parseFloat(tokens[5]);
-                    if (Number.isNaN(x)) throw new ParseCodeError(row, getErrorColumn(tokens, 4), statement, 'x is a number');
-                    if (Number.isNaN(y)) throw new ParseCodeError(row, getErrorColumn(tokens, 5), statement, 'y is a number');
+                    if (Number.isNaN(x)) throw new ParseCodeError(row, getErrorColumn(tokens, 4), statement, window.i18n.template('x_is_a_number', {
+                        name: 'x'
+                    }));
+                    if (Number.isNaN(y)) throw new ParseCodeError(row, getErrorColumn(tokens, 5), statement, window.i18n.template('x_is_a_number', {
+                        name: 'y'
+                    }));
                     if (tokens[6] !== 'resize') throw new ParseCodeError(row, getErrorColumn(tokens, 6), statement, 'resize');
                     const sizeMethod = (tokens[7] === 'abs')
                         ? CodeKeyWord.ABS
@@ -276,8 +302,12 @@ function String2AST(code: string): CodeAST {
                         );
                     const width = parseFloat(tokens[8]);
                     const height = parseFloat(tokens[9]);
-                    if (Number.isNaN(width)) throw new ParseCodeError(row, getErrorColumn(tokens, 8), statement, 'width is a number');
-                    if (Number.isNaN(height)) throw new ParseCodeError(row, getErrorColumn(tokens, 9), statement, 'height is a number');
+                    if (Number.isNaN(width)) throw new ParseCodeError(row, getErrorColumn(tokens, 8), statement, window.i18n.template('x_is_a_number', {
+                        name: window.i18n.width_lc
+                    }));
+                    if (Number.isNaN(height)) throw new ParseCodeError(row, getErrorColumn(tokens, 9), statement, window.i18n.template('x_is_a_number', {
+                        name: window.i18n.height_lc
+                    }));
                     ast.push({
                         type: CodeKeyWord.IMAGE,
                         method: method,
@@ -286,7 +316,7 @@ function String2AST(code: string): CodeAST {
                         size: [sizeMethod, width, height],
                         image: sha256
                     });
-                } else throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, 'Overload error, please see the documentation.');
+                } else throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, window.i18n.overload_error_please_read_the_documentation);
 
                 break;
 
@@ -295,17 +325,25 @@ function String2AST(code: string): CodeAST {
                     if (tokens[1] !== 'from') throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, 'from');
                     const sx = parseInt(tokens[2]);
                     const sy = parseInt(tokens[3]);
+                    const dx = parseInt(tokens[5]);
+                    const dy = parseInt(tokens[6]);
+                    if (Number.isNaN(sx)) throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, window.i18n.template('x_is_a_positive_integer', {
+                        name: 'sx'
+                    }));
+                    if (Number.isNaN(sy)) throw new ParseCodeError(row, getErrorColumn(tokens, 3), statement, window.i18n.template('x_is_a_positive_integer', {
+                        name: 'sy'
+                    }));
                     if (tokens[4] !== 'to') throw new ParseCodeError(row, getErrorColumn(tokens, 5), statement, 'to');
-                    const ex = parseInt(tokens[5]);
-                    const ey = parseInt(tokens[6]);
-                    if (Number.isNaN(sx)) throw new ParseCodeError(row, getErrorColumn(tokens, 2), statement, 'sx is a positive integer.');
-                    if (Number.isNaN(sy)) throw new ParseCodeError(row, getErrorColumn(tokens, 3), statement, 'sy is a positive integer.');
-                    if (Number.isNaN(ex)) throw new ParseCodeError(row, getErrorColumn(tokens, 4), statement, 'ex is a positive integer.');
-                    if (Number.isNaN(ey)) throw new ParseCodeError(row, getErrorColumn(tokens, 5), statement, 'ey is a positive integer.');
+                    if (Number.isNaN(dx)) throw new ParseCodeError(row, getErrorColumn(tokens, 4), statement, window.i18n.template('x_is_a_positive_integer', {
+                        name: 'dx'
+                    }));
+                    if (Number.isNaN(dy)) throw new ParseCodeError(row, getErrorColumn(tokens, 5), statement, window.i18n.template('x_is_a_positive_integer', {
+                        name: 'dy'
+                    }));
                     ast.push({
                         type: CodeKeyWord.DRAW,
                         from: [sx, sy],
-                        to: [ex, ey]
+                        to: [dx, dy]
                     });
                 }
                 break;

@@ -303,7 +303,10 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                             startColumn: 0,
                             endColumn: 100,
                             severity: Monaco.MarkerSeverity.Error,
-                            message: 'The canvas height must be a positive integer.'
+                            message: window.i18n.template('the_item_name_must_be_a_positive_integer', {
+                                item: window.i18n.canvas_lc,
+                                name: window.i18n.height_lc
+                            })
                         });
                     }
                     if (statement.width < 0) {
@@ -313,7 +316,10 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                             startColumn: 0,
                             endColumn: 100,
                             severity: Monaco.MarkerSeverity.Error,
-                            message: 'The canvas width must be a positive integer.'
+                            message: window.i18n.template('the_item_name_must_be_a_positive_integer', {
+                                item: window.i18n.canvas_lc,
+                                name: window.i18n.width_lc
+                            })
                         });
                     }
                     // the first line must be setting canvas size
@@ -326,7 +332,7 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                         startColumn: 0,
                         endColumn: 100,
                         severity: Monaco.MarkerSeverity.Error,
-                        message: 'The first line must be "set canvas xxx xxx"'
+                        message: window.i18n.the_first_line_must_be_set_canvas_xxx
                     });
                 }
             } else {
@@ -338,7 +344,7 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                         startColumn: 0,
                         endColumn: 100,
                         severity: Monaco.MarkerSeverity.Warning,
-                        message: 'This statement will be ignored.'
+                        message: window.i18n.the_statement_will_be_ignored
                     });
                 }
             }
@@ -351,7 +357,11 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                             startColumn: 0,
                             endColumn: 100,
                             severity: Monaco.MarkerSeverity.Warning,
-                            message: `The location width should be in range 0-${canvasSize.width}`
+                            message: window.i18n.template('the_item_name_should_be_in_range', {
+                                item: window.i18n.location_lc,
+                                name: window.i18n.width_lc,
+                                max: canvasSize.width
+                            })
                         });
                     }
                     if (statement.y < 0 || statement.y > canvasSize.height) {
@@ -361,7 +371,11 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                             startColumn: 0,
                             endColumn: 100,
                             severity: Monaco.MarkerSeverity.Warning,
-                            message: `The location height should be in range 0-${canvasSize.height}`
+                            message: window.i18n.template('the_item_name_should_be_in_range', {
+                                item: window.i18n.location_lc,
+                                name: window.i18n.height_lc,
+                                max: canvasSize.height
+                            })
                         });
                     }
                 } else {
@@ -372,7 +386,11 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                             startColumn: 0,
                             endColumn: 100,
                             severity: Monaco.MarkerSeverity.Warning,
-                            message: 'The location width should be in range 0-1'
+                            message: window.i18n.template('the_item_name_should_be_in_range', {
+                                item: window.i18n.location_lc,
+                                name: window.i18n.width_lc,
+                                max: 1
+                            })
                         });
                     }
                     if (statement.y < 0 || statement.y > 1) {
@@ -382,7 +400,11 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                             startColumn: 0,
                             endColumn: 100,
                             severity: Monaco.MarkerSeverity.Warning,
-                            message: 'The location height should be in range 0-1'
+                            message: window.i18n.template('the_item_name_should_be_in_range', {
+                                item: window.i18n.location_lc,
+                                name: window.i18n.height_lc,
+                                max: 1
+                            })
                         });
                     }
                 }
@@ -395,7 +417,9 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                         startColumn: 0,
                         endColumn: 100,
                         severity: Monaco.MarkerSeverity.Warning,
-                        message: `Cannot locate image ${statement.image}`
+                        message: window.i18n.template('cannot_locate_image', {
+                            image: statement.image
+                        })
                     });
                 }
                 if (statement.size[0] === CodeKeyWord.ABS) {
@@ -406,7 +430,11 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                             startColumn: 0,
                             endColumn: 100,
                             severity: Monaco.MarkerSeverity.Warning,
-                            message: `The size width should be in range 0-${canvasSize.width}`
+                            message: window.i18n.template('the_item_name_should_be_in_range', {
+                                item: window.i18n.size,
+                                name: window.i18n.width_lc,
+                                max: canvasSize.width
+                            })
                         });
                     }
                     if (statement.size[2] < 0 || statement.size[2] > canvasSize.height) {
@@ -416,7 +444,11 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                             startColumn: 0,
                             endColumn: 100,
                             severity: Monaco.MarkerSeverity.Warning,
-                            message: `The size height should be in range 0-${canvasSize.height}`
+                            message: window.i18n.template('the_item_name_should_be_in_range', {
+                                item: window.i18n.size,
+                                name: window.i18n.height_lc,
+                                max: canvasSize.height
+                            })
                         });
                     }
                 } else {
@@ -427,7 +459,11 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                             startColumn: 0,
                             endColumn: 100,
                             severity: Monaco.MarkerSeverity.Warning,
-                            message: 'The size width should be in range 0-1'
+                            message: window.i18n.template('the_item_name_should_be_in_range', {
+                                item: window.i18n.size,
+                                name: window.i18n.width_lc,
+                                max: 1
+                            })
                         });
                     }
                     if (statement.size[2] < 0 || statement.size[2] > 1) {
@@ -437,7 +473,11 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                             startColumn: 0,
                             endColumn: 100,
                             severity: Monaco.MarkerSeverity.Warning,
-                            message: 'The size height should be in range 0-1'
+                            message: window.i18n.template('the_item_name_should_be_in_range', {
+                                item: window.i18n.size,
+                                name: window.i18n.height_lc,
+                                max: 1
+                            })
                         });
                     }
                 }
@@ -450,7 +490,11 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                         startColumn: 0,
                         endColumn: 100,
                         severity: Monaco.MarkerSeverity.Warning,
-                        message: `The starting location width should be in range 0-${canvasSize.width}`
+                        message: window.i18n.template('the_item_name_should_be_in_range', {
+                            item: window.i18n.start_location,
+                            name: 'x',
+                            max: canvasSize.width
+                        })
                     });
                 }
                 if (statement.from[1] < 0 || statement.from[1] > canvasSize.height) {
@@ -460,7 +504,11 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                         startColumn: 0,
                         endColumn: 100,
                         severity: Monaco.MarkerSeverity.Warning,
-                        message: `The starting location height should be in range 0-${canvasSize.height}`
+                        message: window.i18n.template('the_item_name_should_be_in_range', {
+                            item: window.i18n.start_location,
+                            name: 'y',
+                            max: canvasSize.height
+                        })
                     });
                 }
                 if (statement.to[0] < 0 || statement.to[0] > canvasSize.width) {
@@ -470,7 +518,11 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                         startColumn: 0,
                         endColumn: 100,
                         severity: Monaco.MarkerSeverity.Warning,
-                        message: `The ending location width should be in range 0-${canvasSize.width}`
+                        message: window.i18n.template('the_item_name_should_be_in_range', {
+                            item: window.i18n.end_location,
+                            name: 'x',
+                            max: canvasSize.width
+                        })
                     });
                 }
                 if (statement.to[1] < 0 || statement.to[1] > canvasSize.height) {
@@ -480,7 +532,11 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                         startColumn: 0,
                         endColumn: 100,
                         severity: Monaco.MarkerSeverity.Warning,
-                        message: `The ending location height should be in range 0-${canvasSize.height}`
+                        message: window.i18n.template('the_item_name_should_be_in_range', {
+                            item: window.i18n.end_location,
+                            name: 'y',
+                            max: canvasSize.height
+                        })
                     });
                 }
             }
@@ -492,7 +548,9 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                         startColumn: 0,
                         endColumn: 100,
                         severity: Monaco.MarkerSeverity.Error,
-                        message: 'The font size must be a positive integer.'
+                        message: window.i18n.template('x_is_a_positive_integer', {
+                            name: window.i18n.font_size
+                        })
                     });
                 }
             }
@@ -505,7 +563,7 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                         startColumn: 0,
                         endColumn: 100,
                         severity: Monaco.MarkerSeverity.Warning,
-                        message: 'The color must be a hexadecimal string with six characters.'
+                        message: window.i18n.color_must_be_hex
                     });
                 }
             }
@@ -517,7 +575,9 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
                         startColumn: 0,
                         endColumn: 100,
                         severity: Monaco.MarkerSeverity.Warning,
-                        message: `We couldn't find font "${statement.value}" in your computer.`
+                        message: window.i18n.template('font_cannot_find', {
+                            name: statement.value
+                        })
                     });
                 }
             }

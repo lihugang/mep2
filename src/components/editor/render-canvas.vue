@@ -15,6 +15,8 @@ import calcSha256 from 'sha256';
 // eslint-disable-next-line camelcase
 import type { Options as h2c_Options } from 'html2canvas';
 
+import type { i18nMap } from '@/i18n';
+
 const props = defineProps<{
     project: Project,
     currentPage: number,
@@ -22,6 +24,7 @@ const props = defineProps<{
     height: number,
     mode: 'normal' | 'insert-text' | 'draw',
     platform: string,
+    i18n: i18nMap,
     // eslint-disable-next-line camelcase, func-call-spacing
     renderText: (element: HTMLElement, options?: Partial<h2c_Options> | undefined, width?: number) => Promise<string>
 }>();
@@ -83,11 +86,11 @@ watch(canvasRef, () => {
                     if (pageSize.width !== AST[0].width) {
                         pageSize.width = AST[0].width;
                     }
-                } else throw new Error('Could not find "set canvas" statement in the first line.');
+                } else throw new Error(props.i18n.could_not_find_set_canvas);
             } catch {
                 ctx.font = '16px "Noto Sans Light"';
                 ctx.fillStyle = '#ff0000';
-                ctx.fillText('Error: could not find "set canvas" statement in the first line.', 100, 100);
+                ctx.fillText(`${props.i18n.error}: ${props.i18n.could_not_find_set_canvas}`, 100, 100);
                 isError = true;
             }
             ctx.fillStyle = '#000000';
@@ -254,7 +257,9 @@ watch(canvasRef, () => {
                             } else {
                                 ctx.fillStyle = '#ff0000';
                                 ctx.font = '16px "Noto Sans Light"';
-                                ctx.fillText(`Warning: Cannot locate image ${statement.image}`, renderX + 20, renderY + 20);
+                                ctx.fillText(props.i18n.template('cannot_locate_image', {
+                                    image: statement.image
+                                }), renderX + 20, renderY + 20);
                             }
                         }
                     } catch (e) {
@@ -269,7 +274,7 @@ watch(canvasRef, () => {
             ctx.font = '16px "Noto Sans Light"';
             ctx.fillText(props.platform.replace('&emsp;', ''), 20, 20);
             ctx.font = '12px "Noto Sans Light"';
-            ctx.fillText(`Render preview | FPS: ${renderRecord.length} | Time: ${getTimeFormat()}`, 20, 40);
+            ctx.fillText(`${props.i18n.render_preview} | ${props.i18n.fps}: ${renderRecord.length} | ${props.i18n.time}: ${getTimeFormat()}`, 20, 40);
 
             requestAnimationFrame(render);
         };

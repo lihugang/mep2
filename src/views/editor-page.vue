@@ -14,12 +14,14 @@
                 @preview="onEditorPreview" :doAction="editorAction" :snippets="props.config.snippets" />
             <render-preview ref="renderPreviewRef" class="render-preview"
                 :style="(mainRegionLayout.preview as CSSProperties)" :height="mainRegionLayout.preview.height ?? '0px'"
-                :width="mainRegionLayout.preview.width ?? '0px'" />
+                :width="mainRegionLayout.preview.width ?? '0px'" 
+                :i18n="props.i18n"/>
             <render-canvas ref="renderCanvasRef" class="render-canvas"
                 :style="(mainRegionLayout.canvas as CSSProperties)" :project="currentProject"
                 :currentPage="projectPreview.pageID" :width="parseInt(mainRegionLayout.canvas.width ?? '0')"
                 :height="parseInt(mainRegionLayout.canvas.height ?? '0')" :mode="userOperationMode"
-                @insert-statement="canvasInsertStatement" :platform="platform" :renderText="html2canvas" />
+                @insert-statement="canvasInsertStatement" :platform="platform" :renderText="html2canvas"
+                :i18n="props.i18n" />
             <image-manager ref="imageManagerRef" class="image-manager"
                 :style="(mainRegionLayout.image as CSSProperties)" :i18n="props.i18n" :project="currentProject"
                 :height="mainRegionLayout.image.height ?? '0px'" :width="mainRegionLayout.image.width ?? '0px'" />

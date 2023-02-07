@@ -35,14 +35,14 @@
                     <div class="release-log-title">{{ props.i18n.release_log }}</div>
                     <div class="monaco-editor release-show" ref="releaseLogBox">
                         <div class="editor-loading" v-if="isReleaseLogLoading">
-                            Loading release log and monaco editor...
-                            <br />Please wait for a minute.
+                            {{ props.i18n.loading_release_log }}
+                            <br />{{ props.i18n.please_wait_for_a_minute }}
                         </div>
                     </div>
                 </div>
             </div>
         </view>
-        <bottom-bar></bottom-bar>
+        <bottom-bar :i18n="props.i18n"></bottom-bar>
         <popup-component ref="popup"></popup-component>
     </div>
 </template>

@@ -102,12 +102,18 @@ export class ParseCodeError extends SyntaxError {
     }
 
     getErrorMessage() {
-        return `Syntax Error at ${this.row}: ${this.column}\nParsing Code Error\nContext:\n${this.context?.toString()}\n${this.expect ? `Expect ${this.expect}` : ''}`;
+        return `${window.i18n.template('syntax_error_at', {
+            row: this.row,
+            column: this.column
+        })}\n${window.i18n.parsing_code_error}\n${window.i18n.context}:\n${this.context.toString()}\n${this.expect ? `${window.i18n.expect} ${this.expect}` : ''}`;
     }
 }
 
 export class UnknownASTSymbolError extends ParseCodeError {
     getErrorMessage() {
-        return `Syntax Error at ${this.row}: ${this.column}\nUnknown AST Symbol Error\nContext:\n${this.context?.toString()}\n${this.expect ? `Expect ${this.expect}` : ''}`;
+        return `${window.i18n.template('syntax_error_at', {
+            row: this.row,
+            column: this.column
+        })}\n${window.i18n.unknown_ast_symbol_error}\n${window.i18n.context}:\n${this.context.toString()}\n${this.expect ? `${window.i18n.expect} ${this.expect}` : ''}`;
     }
 }
