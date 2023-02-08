@@ -88,3 +88,22 @@ Reference: <https://www.overleaf.com/latex/templates/symbol-table/fhqmttqvrnhk.p
 #### Full
 Please see `/docs/latex-symbols.pdf`  
 Reference: <https://www.cmor-faculty.rice.edu/~heinken/latex/symbols.pdf>  
+- - -
+### How to change language
+1. Open your app or web page and wait for loading
+2. Click `Settings` button
+3. Find `Languages` and select your preferred language, for example, `en-US`(English, USA) or `zh-CN`(simplified Chinese, Chinese Mainland)
+4. **Scroll to the bottom, and click `Save` button**
+- - -
+### How to disable updating automatically
+If you are using app:
+- 1. Open your app and wait for loading
+- 2. Click `Setting` button
+- 3. Find `Automatically update` and click the `Enabled` button in the right, now you disable it
+- 4. **Scroll to the bottom, and click `Save` button**
+
+If you are using web platform through our demo <https://mep2-demo.deta.dev>:
+**Sorry, the website will be updated when our publish a new release.**
+
+If you are using other web platforms which you or others built:
+Congratulations! In web platform, software will not be updated automatically. If you want to update them, please rebuild.
