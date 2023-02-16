@@ -4,7 +4,7 @@
     </template>
     <template v-else>
         Fetching user config......
-    </template>
+</template>
 </template>
 
 <script lang="ts" setup>
@@ -44,7 +44,12 @@ const i18nData = reactive<{
 window.i18n = {} as i18nMap;
 
 document.addEventListener('DOMContentLoaded', () => {
-    axios.get('/config').then((response: getConfig) => {
+    const userLanguages: string[] = [];
+    if (typeof navigator.languages === 'object' && navigator.languages instanceof Array) {
+        navigator.languages.forEach(lang => userLanguages.push(lang));
+    } else if (typeof navigator.language === 'string') userLanguages.push(navigator.language);
+    else userLanguages.push('en-US');
+    axios.get(`/config?default.languages=${userLanguages.join(',')}`).then((response: getConfig) => {
         if (!response.ok) throw response;
         userConfig.fontFamily = response.data.fontFamily;
         userConfig.language = response.data.language;
