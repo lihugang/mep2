@@ -1,5 +1,5 @@
 <template>
-    <div class="mask" v-if="popups.length"></div>
+    <div class="mask" v-if="popups.length" ref="mask"></div>
     <div class="popup" v-if="popups.length">
         <div class="text">
             {{ popups[0].text }}
@@ -12,7 +12,7 @@
                 <span style="user-select: none">&thinsp;&thinsp;</span>
             </template>
         </div>
-    </div>
+</div>
 </template>
 <style scoped>
 .mask {
@@ -64,7 +64,7 @@
 }
 </style>
 <script lang="ts" setup>
-import { defineExpose, reactive } from 'vue';
+import { defineExpose, reactive, ref, onMounted } from 'vue';
 import type * as popup from './popup';
 const popups: popup.task[] = reactive([]);
 defineExpose({
@@ -81,4 +81,21 @@ const buttonClick = (task: popup.task, text: string) => {
     popups.shift();
     cb && cb(text);
 };
+
+const mask = ref<HTMLDivElement>();
+window.addEventListener('resize', () => {
+    if (mask.value) {
+        mask.value.style.backdropFilter = 'blur(4px) brightness(75%)';
+        maskPolyfill();
+    }
+});
+const maskPolyfill = () => {
+    if (mask.value && window.CSS && typeof window.CSS.supports === 'function') {
+        if (!CSS.supports('backdrop-filter', 'blur(4px) brightness(75%)')) {
+            mask.value.style.backgroundColor = 'white';
+        }
+    }
+};
+
+onMounted(maskPolyfill);
 </script>
