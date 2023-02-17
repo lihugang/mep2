@@ -229,5 +229,7 @@ export default {
     auto_update_details: 'We\'ll download the latest release of MEP2 from GitHub and store it in your home directory, because of platform limits, you need to install it manually.',
     check_update: 'Check for update',
     check_update_details: 'We\'ll connect to the server (mep2.lihugang.top) to check for updates.',
-    detect_a_new_version: 'We detected a new version [[ version ]] of MEP2, please visit https://mep2.lihugang.top/download to download it.'
+    detect_a_new_version: 'We detected a new version [[ version ]] of MEP2, please visit https://mep2.lihugang.top/download to download it.',
+    pre_process_code_error: 'Failed to preprocess your code',
+    unfinishing_multi_line_string_macro: 'An unfinished multiline string macro.'
 };

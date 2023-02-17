@@ -6,6 +6,9 @@ import type { Ref } from 'vue';
 import { ParseCodeError, CodeKeyWord } from './AST.type';
 import type { config } from '@/config';
 
+import preprocessCodeString from './preprocess';
+export { preprocessCodeString };
+
 export function registerLanguage() {
     Monaco.languages.register({
         id: 'mep@2-script'
@@ -271,7 +274,7 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
 }, onCompileError: (e: ParseCodeError) => void) {
     const markers: Monaco.editor.IMarkerData[] = [];
     try {
-        page.codeString = code;
+        page.codeString = preprocessCodeString(code);
     } catch (e) {
         if (e instanceof ParseCodeError) {
             markers.push({

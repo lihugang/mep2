@@ -229,5 +229,7 @@ export default {
     auto_update_details: '我们会从GitHub上下载MEP2的最新版本然后在您的用户目录储存，由于平台限制，你需要手动安装。',
     check_update: '检查更新',
     check_update_details: '我们会连接到服务器(mep2.lihugang.top)以检查更新。',
-    detect_a_new_version: '我们检测到MEP2有新版本 [[ version ]]，请访问 https://mep2.lihugang.top/download 下载。'
+    detect_a_new_version: '我们检测到MEP2有新版本 [[ version ]]，请访问 https://mep2.lihugang.top/download 下载。',
+    pre_process_code_error: '预处理你的代码出错',
+    unfinishing_multi_line_string_macro: '未结束的多行字符串宏'
 };

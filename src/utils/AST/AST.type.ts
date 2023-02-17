@@ -101,19 +101,20 @@ export class ParseCodeError extends SyntaxError {
         this.expect = expect;
     }
 
+    getErrorName() {
+        return window.i18n.parsing_code_error;
+    }
+
     getErrorMessage() {
         return `${window.i18n.template('syntax_error_at', {
             row: this.row,
             column: this.column
-        })}\n${window.i18n.parsing_code_error}\n${window.i18n.context}:\n${this.context.toString()}\n${this.expect ? `${window.i18n.expect} ${this.expect}` : ''}`;
+        })}\n${this.getErrorName()}\n${window.i18n.context}:\n${this.context.toString()}\n${this.expect ? `${window.i18n.expect} ${this.expect}` : ''}`;
     }
 }
 
 export class UnknownASTSymbolError extends ParseCodeError {
-    getErrorMessage() {
-        return `${window.i18n.template('syntax_error_at', {
-            row: this.row,
-            column: this.column
-        })}\n${window.i18n.unknown_ast_symbol_error}\n${window.i18n.context}:\n${this.context.toString()}\n${this.expect ? `${window.i18n.expect} ${this.expect}` : ''}`;
+    getErrorName() {
+        return window.i18n.unknown_ast_symbol_error;
     }
 }
