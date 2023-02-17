@@ -1,13 +1,13 @@
-# the Math Editor for Photos (MEP) 2.0.0 Documentation
+# the Math Editor for Photos (MEP) 2.1.1 Documentation
 ![the Math Editor for Photos@2](software-title.png)
 - - -
 Visit counts: ![visit-count](https://profile-counter.glitch.me/lihugang-MEP2/count.svg)
 - - -
 ### Basic information
-The official website of MEP@2 is <https://mep2.deta.dev>. Source code address is <https://github.com/lihugang/mep2>. As an open source software, we also welcome you to modify and improve this software. However, it should be noted that this software is based on **GPL3**, and you need to abide by this open source license <https://www.gnu.org/licenses/gpl-3.0.en.html>
+The official website of MEP@2 is <https://mep2.lihugang.top>. Source code address is <https://github.com/lihugang/mep2>. As an open source software, we also welcome you to modify and improve this software. However, it should be noted that this software is based on **GPL3**, and you need to abide by this open source license <https://www.gnu.org/licenses/gpl-3.0.en.html>
 - - -
 ### How to download
-Use your browser to visit <https://mep2.deta.dev/download> or <https://github.com/lihugang/mep2/releases> and download the version which you wants to use. Generally, we offered 64-bit executable files for Windows. If you want to use it in other platforms, please send an issue at <https://github.com/lihugang/mep2/issues> or build it on your own.
+Use your browser to visit <https://mep2.lihugang.top/download> or <https://github.com/lihugang/mep2/releases> and download the version which you wants to use. Generally, we offered 64-bit executable files for Windows. If you want to use it in other platforms, please send an issue at <https://github.com/lihugang/mep2/issues> or build it on your own.
 - - -
 ### How to build
 1. Clone repository from GitHub `git clone https://github.com/lihugang/mep2.git --depth=1`
@@ -102,7 +102,7 @@ If you are using app:
 - 3. Find `Automatically update` and click the `Enabled` button in the right, now you disable it
 - 4. **Scroll to the bottom, and click `Save` button**
 
-If you are using web platform through our demo <https://mep2-demo.deta.dev>:
+If you are using web platform through our demo <https://demo.mep2.lihugang.top>:
 **Sorry, the website will be updated when our publish a new release.**
 
 If you are using other web platforms which you or others built:

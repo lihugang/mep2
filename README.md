@@ -1,4 +1,4 @@
-# The Math Editor For Photos (MEP) 2.x.x version
+# The Math Editor For Photos (MEP) 2.1.1 version
 - - -
 Visit counts: ![visit-count](https://profile-counter.glitch.me/lihugang-MEP2/count.svg)  
 Version: ![version](https://img.shields.io/github/package-json/v/lihugang/mep2)  
@@ -20,4 +20,4 @@ PRs: ![](https://img.shields.io/github/issues-pr/lihugang/mep2) ![](https://img.
 - Support file transfer and collaborative editing
 - Lite functions for mobile side
 - - -
-For further information, please read `docs/index.md` or <https://mep2.deta.dev/documentation>
+For further information, please read `docs/index.md` or <https://mep2.lihugang.top/documentation>

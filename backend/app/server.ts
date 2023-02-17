@@ -25,9 +25,28 @@ export default function startServer(config: {
             if (req.method === 'OPTIONS') return res.status(204).json({});
 
             router.get('/config', (req, res) => {
+                const supportLanguages: {
+                    [key: string]: string
+                } = {
+                    'zh-cn': 'zh-CN',
+                    'en-us': 'en-US',
+                    'en': 'en-US',
+                    'zh': 'zh-CN'
+                };
+                let defaultLanguages: string[] = [];
+                try {
+                    defaultLanguages = decodeURIComponent(req.query['default.languages'].toString()).split(',');
+                } catch { };
+                let defaultLanguage = defaultLanguages[0] ?? 'en-US';
+                for (let i = 0; i < defaultLanguages.length; ++i) {
+                    if (supportLanguages[defaultLanguages[i].toLowerCase()]) {
+                        defaultLanguage = supportLanguages[defaultLanguages[i].toLowerCase()];
+                        break;
+                    }
+                }
                 const config = {
                     fontFamily: 'Noto Sans Light',
-                    language: 'en-US',
+                    language: defaultLanguage,
                     editor: {
                         color: '#ff0000',
                         fontSize: 60
@@ -123,15 +142,15 @@ export default function startServer(config: {
                 });
                 let filename = 'mep2-latest-installer';
                 try {
-                    filename = await (await fetch(`https://mep2.deta.dev/latest.filename?platform=${process.platform}&arch=${process.arch}`)).text();
+                    filename = await (await fetch(`https://mep2.lihugang.top/latest.filename?platform=${process.platform}&arch=${process.arch}`)).text();
                 } catch {
-                    dialog('Failed to connect to download server, please visit please visit https://mep2.deta.dev/download to download and install it manually.');
+                    dialog('Failed to connect to download server, please visit please visit https://mep2.lihugang.top/download to download and install it manually.');
                     return;
                 }
-                const downloadStream = download(`https://mep2.deta.dev/latest?platform=${process.platform}&arch=${process.arch}`);
+                const downloadStream = download(`https://mep2.lihugang.top/latest?platform=${process.platform}&arch=${process.arch}`);
                 downloadStream.pipe(writeStream);
                 downloadStream.catch(() => {
-                    dialog('Failed to download the latest installer, please visit https://mep2.deta.dev/download to download and install it manually.');
+                    dialog('Failed to download the latest installer, please visit https://mep2.lihugang.top/download to download and install it manually.');
                     return;
                 });
                 writeStream.on('close', () => {

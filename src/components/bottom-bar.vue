@@ -3,7 +3,7 @@
         <div class="copyleft-container">
             Copyleft <img src="/assets/copyleft.png" class="copyleft" title="copyleft" /> 2022-2023 MEP,
             <a href="/gpl-3.0.pdf" :title="props.i18n.see_license" target="_blank">GPL V3 </a>
-            , {{ props.i18n.official_website }} At <a href="https://mep2.deta.dev" class="official-website-link">mep2.deta.dev</a>
+            , {{ props.i18n.official_website }} At <a href="https://mep2.lihugang.top" class="official-website-link">mep2.lihugang.top</a>
         </div>
 
     </div>

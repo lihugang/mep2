@@ -29,9 +29,28 @@ app.use('/api/v1', (() => {
         if (req.method === 'OPTIONS') return res.status(204).json({});
 
         router.get('/config', (req, res) => {
+            const supportLanguages: {
+                [key: string]: string
+            } = {
+                'zh-cn': 'zh-CN',
+                'en-us': 'en-US',
+                'en': 'en-US',
+                'zh': 'zh-CN'
+            };
+            let defaultLanguages: string[] = [];
+            try {
+                defaultLanguages = decodeURIComponent(req.query['default.languages'].toString()).split(',');
+            } catch { };
+            let defaultLanguage = defaultLanguages[0] ?? 'en-US';
+            for (let i = 0; i < defaultLanguages.length; ++i) {
+                if (supportLanguages[defaultLanguages[i].toLowerCase()]) {
+                    defaultLanguage = supportLanguages[defaultLanguages[i].toLowerCase()];
+                    break;
+                }
+            }
             const config = {
                 fontFamily: 'Noto Sans Light',
-                language: 'en-US',
+                language: defaultLanguage,
                 editor: {
                     color: '#ff0000',
                     fontSize: 60

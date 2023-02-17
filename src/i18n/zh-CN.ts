@@ -10,7 +10,7 @@ export default {
     version: '版本',
     confirm: '确认',
     cancel: '取消',
-    web_side_notification: '我们检测到您正在通过网页使用这项服务。由于浏览器限制，一些功能可能被限制或不能正常工作。我们建议您安装客户端 (访问 https://mep2.deta.dev/download) 或者将您的浏览器更换或更新到Google Chrome的最新版本。(访问 https://www.google.com/chrome 下载，如果您在中国大陆地区，请访问 https://www.google.cn/chrome)',
+    web_side_notification: '我们检测到您正在通过网页使用这项服务。由于浏览器限制，一些功能可能被限制或不能正常工作。我们建议您安装客户端 (访问 https://mep2.lihugang.top/download) 或者将您的浏览器更换或更新到Google Chrome的最新版本。(访问 https://www.google.com/chrome 下载，如果您在中国大陆地区，请访问 https://www.google.cn/chrome)',
     settings: '设置',
     untitled: '未命名',
     web_platform: '网页',
@@ -208,7 +208,7 @@ export default {
     unknown_ast_symbol_error: '无法识别的抽象语法树符号',
     x_is_a_positive_integer: '[[ name ]] 必须是正整数',
     x_is_a_float_between_0_and_1: '[[ name ]] 必须是在0和1之间的实数',
-    overload_error_please_read_the_documentation: '无法找到匹配重载，请查阅文档，https://mep2.deta.dev/docs',
+    overload_error_please_read_the_documentation: '无法找到匹配重载，请查阅文档，https://mep2.lihugang.top/docs',
     x_is_a_number: '[[ name ]] 是数字',
     could_not_find_set_canvas: '在第一行未能找到 "set canvas" 语句',
     error: 'Error',
@@ -228,6 +228,6 @@ export default {
     auto_update: '自动更新',
     auto_update_details: '我们会从GitHub上下载MEP2的最新版本然后在您的用户目录储存，由于平台限制，你需要手动安装。',
     check_update: '检查更新',
-    check_update_details: '我们会连接到服务器(mep2.deta.dev)以检查更新。',
-    detect_a_new_version: '我们检测到MEP2有新版本 [[ version ]]，请访问 https://mep2.deta.dev/download 下载。'
+    check_update_details: '我们会连接到服务器(mep2.lihugang.top)以检查更新。',
+    detect_a_new_version: '我们检测到MEP2有新版本 [[ version ]]，请访问 https://mep2.lihugang.top/download 下载。'
 };

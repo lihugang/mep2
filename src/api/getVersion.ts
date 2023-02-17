@@ -12,7 +12,7 @@ export default {
         });
     }),
     latestVersion: new Promise<version['data']>((resolve, reject) => {
-        rawAxios.get('https://mep2.deta.dev/latest.version').then((data) => {
+        rawAxios.get('https://mep2.lihugang.top/latest.version').then((data) => {
             resolve(data.data.split('.').map((item: string) => parseInt(item)));
         }).catch((err: unknown) => {
             reject(err);

@@ -10,7 +10,7 @@ export default {
     version: 'Version',
     confirm: 'Confirm',
     cancel: 'Cancel',
-    web_side_notification: 'We have detected that you are using this service through the web platform. Due to browser restrictions, some functions may be limited or not work properly. We recommend that you install the client (visit https://mep2.deta.dev/download) or replace or upgrade your browser to the latest version of Google Chrome (visit https://www.google.com/chrome to download, for users in Chinese Mainland, please visit https://www.google.cn/chrome)',
+    web_side_notification: 'We have detected that you are using this service through the web platform. Due to browser restrictions, some functions may be limited or not work properly. We recommend that you install the client (visit https://mep2.lihugang.top/download) or replace or upgrade your browser to the latest version of Google Chrome (visit https://www.google.com/chrome to download, for users in Chinese Mainland, please visit https://www.google.cn/chrome)',
     settings: 'Settings',
     untitled: 'Untitled',
     web_platform: 'Web Platform',
@@ -208,7 +208,7 @@ export default {
     unknown_ast_symbol_error: 'Unknown AST Symbol Error',
     x_is_a_positive_integer: '[[ name ]] is a positive integer.',
     x_is_a_float_between_0_and_1: '[[ name ]] is a real between 0 and 1.',
-    overload_error_please_read_the_documentation: 'Overload error, please read the documentation. https://mep2.deta.dev/docs',
+    overload_error_please_read_the_documentation: 'Overload error, please read the documentation. https://mep2.lihugang.top/docs',
     x_is_a_number: '[[ name ]] is a number',
     could_not_find_set_canvas: 'Could not find "set canvas" statement in the first line.',
     error: 'Error',
@@ -228,6 +228,6 @@ export default {
     auto_update: 'Automatically update',
     auto_update_details: 'We\'ll download the latest release of MEP2 from GitHub and store it in your home directory, because of platform limits, you need to install it manually.',
     check_update: 'Check for update',
-    check_update_details: 'We\'ll connect to the server (mep2.deta.dev) to check for updates.',
-    detect_a_new_version: 'We detected a new version [[ version ]] of MEP2, please visit https://mep2.deta.dev/download to download it.'
+    check_update_details: 'We\'ll connect to the server (mep2.lihugang.top) to check for updates.',
+    detect_a_new_version: 'We detected a new version [[ version ]] of MEP2, please visit https://mep2.lihugang.top/download to download it.'
 };
