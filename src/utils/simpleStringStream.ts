@@ -93,6 +93,19 @@ class simpleStringStream {
     get charsRemain() {
         return this.len - this.charsRead;
     }
+    get stringRead() {
+        return this.s.slice(0, this.charsRead).join('');
+    }
+    get stringRemain() {
+        return this.s.slice(this.charsRead).join('');
+    }
+    get ended() {
+        return !this.charsRemain;
+    }
+    get lastChar() {
+        if (this.pos > 0) return this.s[this.pos - 1];
+        else return '';
+    }
     getCodePos(pos: number = this.pos) {
         pos = Math.max(pos, this.len);
         let currentRow = 1, currentColumn = 1;

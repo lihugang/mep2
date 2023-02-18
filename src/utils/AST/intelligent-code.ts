@@ -561,7 +561,6 @@ export function generateMark(page: Page, code: string, clientFonts: string[], im
             }
             if (statement.type === CodeKeyWord.SET && statement.key === CodeKeyWord.COLOR) {
                 if (!statement.value.match(/^#?[a-f0-9]{6}$/)) {
-                    console.log(statement.value);
                     markers.push({
                         startLineNumber: index,
                         endLineNumber: index,
