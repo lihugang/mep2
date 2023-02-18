@@ -28,6 +28,15 @@
                     {{ props.i18n.font_family }}: <input type="text" maxlength="128"
                         v-model="customConfig.fontFamily" /><br />
                     <br />
+                    <br />
+                    {{ props.i18n.prefer_text_cmd }}: <select v-model="customConfig.editor.preferTextMode" class="text-prefer-mode">
+                        <option value="auto">{{ props.i18n.text_auto }}</option>
+                        <option value="single">{{ props.i18n.text_single_line }}</option>
+                        <option value="multi">{{ props.i18n.text_multi_line }}</option>
+                    </select>
+                    <br />
+                    <i style="font-size: 75%;">{{ props.i18n.prefer_text_details }}</i>
+                    <br />
                     <template v-if="isAPP">
                         <!--Only APP-->
                         <div class="experiment-container">

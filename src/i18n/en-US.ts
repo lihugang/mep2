@@ -231,5 +231,10 @@ export default {
     check_update_details: 'We\'ll connect to the server (mep2.lihugang.top) to check for updates.',
     detect_a_new_version: 'We detected a new version [[ version ]] of MEP2, please visit https://mep2.lihugang.top/download to download it.',
     pre_process_code_error: 'Failed to preprocess your code',
-    unfinishing_multi_line_string_macro: 'An unfinished multiline string macro.'
+    unfinishing_multi_line_string_macro: 'An unfinished multiline string macro.',
+    prefer_text_cmd: 'Preferred text command format',
+    text_multi_line: 'MultiLine',
+    text_single_line: 'Single Line',
+    text_auto: 'Auto',
+    prefer_text_details: 'Choose your preferred text command and decide how editor expand text command, if it sets to MultiLine, the text command will be expanded in multi-line mode, for further details, please read the documentation. If it sets to Single Line, all lines will be written in one line joined with "\\\\" symbol. If it sets to auto, if there is no line break symbols, it will display in single line mode, otherwise, displaying in multi-line mode. The default option is auto.'
 };

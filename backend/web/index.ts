@@ -53,7 +53,8 @@ app.use('/api/v1', (() => {
                 language: defaultLanguage,
                 editor: {
                     color: '#ff0000',
-                    fontSize: 60
+                    fontSize: 60,
+                    preferTextMode: 'auto'
                 },
                 snippets: [],
                 experiments: {

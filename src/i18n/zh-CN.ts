@@ -231,5 +231,10 @@ export default {
     check_update_details: '我们会连接到服务器(mep2.lihugang.top)以检查更新。',
     detect_a_new_version: '我们检测到MEP2有新版本 [[ version ]]，请访问 https://mep2.lihugang.top/download 下载。',
     pre_process_code_error: '预处理你的代码出错',
-    unfinishing_multi_line_string_macro: '未结束的多行字符串宏'
+    unfinishing_multi_line_string_macro: '未结束的多行字符串宏',
+    prefer_text_cmd: '偏好字符串格式',
+    text_multi_line: '多行',
+    text_single_line: '单行',
+    text_auto: '自动',
+    prefer_text_details: '选择你偏好的字符串格式并且决定编辑器怎么展开文本命令，如果设为多行，文本会在多行模式下展开，如需更多信息，请阅读文档。如果设成单行，所有行会被"\\\\"符号拼合在一行内。如果设成自动，当没有换行符时，会使用单行模式展示，否则以多行模式展示。默认选项是自动。'
 };

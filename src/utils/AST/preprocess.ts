@@ -81,7 +81,7 @@ export default function preprocessCodeString(code: string) {
             while ((macroContentFragment = macroInlineStream.read(
                 streamProcessOptions.MAX,
                 streamProcessOptions.READ_UNTIL_LF /* read one line content */
-            )), !(macroContentFragment.code & streamProcessOptions.READ_EOF) /* when read eof, terminate the repeat */) {
+            )), !(macroContentFragment.code & streamProcessOptions.READ_EOF) /* when read eof, terminating the repeat */) {
                 macroCode.push(macroContentFragment.value);
                 currentLine++;
             }

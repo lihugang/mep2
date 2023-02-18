@@ -20,7 +20,8 @@ const userConfig = reactive<config>({
     language: 'en-US',
     editor: {
         color: '',
-        fontSize: 1
+        fontSize: 1,
+        preferTextMode: 'auto'
     },
     snippets: [],
     experiments: {
@@ -42,6 +43,7 @@ const i18nData = reactive<{
 });
 
 window.i18n = {} as i18nMap;
+window.config = {} as config;
 
 document.addEventListener('DOMContentLoaded', () => {
     const userLanguages: string[] = [];
@@ -56,6 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
         userConfig.editor = response.data.editor;
         userConfig.experiments = response.data.experiments;
         userConfig.update = response.data.update;
+        window.config = userConfig;
         // get config, load i18n components
         i18n(userConfig.language).then((value) => {
             i18nData.data = value;

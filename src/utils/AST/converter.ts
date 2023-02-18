@@ -32,15 +32,32 @@ function AST2String(AST: CodeAST): string {
                 lines.push(`macro ${unit.key} ${unit.value}`);
                 break;
             case CodeKeyWord.TEXT:
-                switch (unit.method) {
-                    case CodeKeyWord.ABS:
-                        lines.push(`text abs ${unit.x} ${unit.y} ${unit.text}`);
-                        break;
-                    case CodeKeyWord.RWD:
-                        lines.push(`text rwd ${unit.x} ${unit.y} ${unit.text}`);
-                        break;
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    default: throw new UnknownASTSymbolError(index, 6, `text ${(unit as any).key}`);
+                {
+                    let processedText = unit.text;
+                    if (window.config.editor.preferTextMode === 'multi'
+                        || (
+                            window.config.editor.preferTextMode === 'auto' && unit.text.includes('\\')
+                        )) {
+                        console.log(unit.text);
+                        const fragments = unit.text.split('\\\\').map(item => item.trim()).map(item => {
+                            if (item[0] === '$' && item.at(-1) === '$') return item.slice(1, -1);
+                            if (item[0] === '$') return item.slice(1);
+                            if (item.at(-1) === '$') return item.slice(0, -1);
+                            return item;
+                        });
+                        console.log(fragments);
+                        processedText = '`\n' + fragments.join('\n') + '\n`';
+                    }
+                    switch (unit.method) {
+                        case CodeKeyWord.ABS:
+                            lines.push(`text abs ${unit.x} ${unit.y} ${processedText}`);
+                            break;
+                        case CodeKeyWord.RWD:
+                            lines.push(`text rwd ${unit.x} ${unit.y} ${processedText}`);
+                            break;
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        default: throw new UnknownASTSymbolError(index, 6, `text ${(unit as any).key}`);
+                    }
                 }
                 break;
             case CodeKeyWord.IMAGE:

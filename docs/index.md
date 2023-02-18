@@ -74,7 +74,16 @@ Use your browser to visit <https://mep2.lihugang.top/download> or <https://githu
 `text $locate_method $x $y $text` put text in the canvas
 - locate_method/x/y: the same with the `image` locate statements
 - text: the text content, if you want to type some math formulas, please put them beside `$` and `$`, use `\\` to change into the next line  
-  For example, `text rwd 0.5 0.5 Hello World $a^2+b^2=c^2 \\ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$` ![](text-example.png)  
+  For example, `text rwd 0.5 0.5 Hello World $a^2+b^2=c^2 \\ x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$` ![](text-example.png)    
+- Now, we support multi-line text macro such as this 
+  ```
+  text rwd 0.5 0.5 `
+  Hello World
+  $x=\frac{-b \pm \sqrt{b^2-4ac} }{2a}$
+  `
+  ```
+  . It will be converted into `text rwd 0.5 0.5 Hello World $\\$ $x=\frac{-b \pm \sqrt{b^2-4ac} }{2a}$` after preprocessing.
+  For further details, please see [issue/6](https://github.com/lihugang/mep2/issues/6) (**2.1.2** or later version supports this function)
 
 `macro $key $value` define a LaTeX macro (If you feel typing LaTeX commands is too long, you can define a macro. However, we recommend that you add `snippets` to the configuration to quickly complete code snippets through Monaco-editor's smart prompts.)
 - key: a string, the new macro name

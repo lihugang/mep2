@@ -4,6 +4,7 @@ export interface config {
     editor: {
         color: string;
         fontSize: number;
+        preferTextMode: 'auto' | 'multi' | 'single';
     },
     snippets: {
         text: string;
