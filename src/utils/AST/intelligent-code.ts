@@ -41,7 +41,8 @@ export function highlightLanguage() {
             textLocation: [[/abs/, { token: 'abs', next: '@text-abs' }], [/rwd/, { token: 'rwd', next: '@text-rwd' }]],
             'text-abs': [[/[0-9]+\s[0-9]+/, { token: 'pos', next: '@text' }]],
             'text-rwd': [[/[0-9]+\s[0-9]+/, { token: 'warning', next: '@popall' }], [/[0-1]{1}\s[0-1]{1}/, { token: 'pos', next: '@text' }], [/0\.[0-9]*\s0\.[0-9]*/, { token: 'pos', next: '@text' }]],
-            text: [[/.*/, { token: 'string', next: '@popall' }]],
+            text: [[/\s*`[^`\n]*`\s*/, { token: 'string', next: '@popall' }], [/\s*`/, { token: 'macro', next: '@multi-line-text' }], [/[^`\n]*/, { token: 'string', next: '@popall' }]],
+            'multi-line-text': [[/\s*`\s*/, { token: 'macro', next: '@popall' }], [/.*/, { token: 'string', next: '@multi-line-text' }], [/\r*\n*/, { token: 'string', next: '@multi-line-text' }]],
 
             macro: [[/\s[0-9A-Za-z\\{}[\]()]*/, { token: 'macro-key', next: '@macro-value' }]],
             'macro-value': [[/\s[0-9A-Za-z\\{}[\]()]*/, { token: 'macro-value', next: '@popall' }]],
@@ -83,7 +84,8 @@ export function highlightLanguage() {
             { token: 'abs', foreground: '228b22' },
             { token: 'rwd', foreground: '32cd32' },
             { token: 'macro-key', foreground: '90e0e4' },
-            { token: 'macro-value', foreground: '4e8d90' }
+            { token: 'macro-value', foreground: '4e8d90' },
+            { token: 'macro', foreground: '69b6ba' }
         ],
         colors: {}
     });
