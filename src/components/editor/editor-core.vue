@@ -3,9 +3,7 @@
         <div class="editor" :id="editorID" ref="editorRef"></div>
     </div>
 </template>
-<style scoped>
-
-</style>
+<style scoped></style>
 <script lang="ts" setup>
 import { defineExpose, defineEmits, defineProps, ref, onMounted, watch, reactive } from 'vue';
 import * as Monaco from 'monaco-editor';
@@ -187,20 +185,6 @@ const sendPreviewSignal = () => {
             } else if (currentLine.substring(0, 9) === 'set font ') {
                 const font = currentLine.substring(9);
                 emits('preview', 'font', font);
-            } else if (currentLine.substring(0, 5) === 'text ') {
-                const mathFragments = Array.from(currentLine.matchAll(/\$.*?\$/g));
-                for (let i = 0; i < mathFragments.length; ++i) {
-                    if (
-                        (mathFragments[i].index ?? 0) <= pos.column - 1 &&
-                        (mathFragments[i].index ?? 0) + mathFragments[i][0].length >= pos.column - 1
-                    ) {
-                        emits('preview', 'LaTeX', mathFragments[i][0].slice(1, -1));
-                    }
-                }
-                emits('highlight', {
-                    type: 'text',
-                    pos: pos.lineNumber - 1
-                });
             } else if (currentLine.substring(0, 6) === 'image ') {
                 if (isCouldSendPreviewImageSignal) {
                     isCouldSendPreviewImageSignal = false;
@@ -214,6 +198,21 @@ const sendPreviewSignal = () => {
                         emits('preview', 'image', images);
                     }
                 }
+            } else {
+                // multi-line text macro LaTeX support
+                const mathFragments = Array.from(currentLine.matchAll(/\$.*?\$/g));
+                for (let i = 0; i < mathFragments.length; ++i) {
+                    if (
+                        (mathFragments[i].index ?? 0) <= pos.column - 1 &&
+                        (mathFragments[i].index ?? 0) + mathFragments[i][0].length >= pos.column - 1
+                    ) {
+                        emits('preview', 'LaTeX', mathFragments[i][0].slice(1, -1));
+                    }
+                }
+                emits('highlight', {
+                    type: 'text',
+                    pos: pos.lineNumber - 1
+                });
             }
         }
     }
