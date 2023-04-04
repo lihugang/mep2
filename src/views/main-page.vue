@@ -135,14 +135,15 @@ onMounted(() => {
     isElectron.then(isElectron => {
         if (isElectron) {
             // electron, check for updates
-            if (props.config.update.checkForUpdate) {
-                import('../api/getVersion').then(getVersion => getVersion.default).then(getVersion => {
-                    Promise.all(
-                        [
-                            getVersion.localVersion,
-                            getVersion.latestVersion
-                        ]
-                    ).then(version => {
+            import('../api/getVersion').then(getVersion => getVersion.default).then(getVersion => {
+                Promise.all(
+                    [
+                        getVersion.localVersion,
+                        getVersion.latestVersion
+                    ]
+                ).then(version => {
+                    if (props.config.update.checkForUpdate) {
+
                         if (
                             JSON.stringify(version[0]) ===
                             JSON.stringify(version[1])
@@ -155,6 +156,14 @@ onMounted(() => {
                             if (props.config.update.autoUpdate) {
                                 import('../api/updateVersion').then(updateVersion => updateVersion.default());
                                 loadingDisplayWords.value = props.i18n.update_version;
+                                import('../api/queryUpdateStatus').then(queryUpdateStatusFunction => {
+                                    const queryUpdateStatus = () => {
+                                        queryUpdateStatusFunction.default().then((isUpdated) => {
+                                            if (isUpdated) return loadComponents(version[0]);
+                                            else return queryUpdateStatus();
+                                        });
+                                    };
+                                });
                             } else {
                                 alert(props.i18n.template('detect_a_new_version', {
                                     version: version[1].join('.')
@@ -162,11 +171,13 @@ onMounted(() => {
                                 return loadComponents(version[0]);
                             }
                         }
-                    }).catch(() => {
-                        return loadComponents('latest');
-                    });
-                }).catch(() => loadComponents('latest'));
-            } else return loadComponents('latest');
+
+                    } else return loadComponents(version[0]);
+                }).catch(() => {
+                    return loadComponents('latest');
+                });
+            }).catch(() => loadComponents('latest'));
+
         } else {
             requestIdleCallback(() => {
                 // when browser idle, notice user he/she is using web platform, some function may be disabled, suggest he/she installing app

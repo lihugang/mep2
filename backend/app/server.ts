@@ -131,6 +131,8 @@ export default function startServer(config: {
                 }
             });
 
+            let is_update_software_ok = false;
+
             router.post('/updateSoftwareFromServer', async (req, res) => {
                 const tmpDirectoryName = 'mep2-latest-installer-' + crypto.randomBytes(2).toString('hex');
                 const tmpPath = pathLib.join(os.tmpdir(), tmpDirectoryName);
@@ -145,12 +147,14 @@ export default function startServer(config: {
                 try {
                     filename = await (await fetch(`https://mep2.lihugang.top/latest.filename?platform=${process.platform}&arch=${process.arch}`)).text();
                 } catch {
+                    is_update_software_ok = true;
                     dialog('Failed to connect to download server, please visit please visit https://mep2.lihugang.top/download to download and install it manually.');
                     return;
                 }
                 const downloadStream = download(`https://mep2.lihugang.top/latest?platform=${process.platform}&arch=${process.arch}`);
                 downloadStream.pipe(writeStream);
                 downloadStream.catch(() => {
+                    is_update_software_ok = true;
                     dialog('Failed to download the latest installer, please visit https://mep2.lihugang.top/download to download and install it manually.');
                     return;
                 });
@@ -160,6 +164,7 @@ export default function startServer(config: {
                     });
                     fs.createReadStream(tmpFilename).pipe(writeStream);
                     writeStream.on('close', () => {
+                        is_update_software_ok = true;
                         dialog(`The latest installer is downloaded at ${pathLib.join(os.homedir(), filename)}, please install it manually.`);
                         destroyElectron();
                     });
@@ -167,6 +172,13 @@ export default function startServer(config: {
 
                 res.status(202).json({
                     ok: 1
+                });
+            });
+
+            router.get('/queryUpdateStatus', (req, res) => {
+                res.status(200).json({
+                    ok: 1,
+                    data: is_update_software_ok
                 });
             });
 
