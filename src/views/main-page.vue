@@ -149,7 +149,7 @@ onMounted(() => {
                             // stringify version arraies, compare whether they fits, the comparison between objects are comparing their memory addresses, not values
                         ) {
                             // version equals
-                            return loadComponents();
+                            return loadComponents(version[0]);
                         } else {
                             // update to the latest version
                             if (props.config.update.autoUpdate) {
@@ -159,14 +159,14 @@ onMounted(() => {
                                 alert(props.i18n.template('detect_a_new_version', {
                                     version: version[1].join('.')
                                 }));
-                                return loadComponents();
+                                return loadComponents(version[0]);
                             }
                         }
                     }).catch(() => {
-                        return loadComponents();
+                        return loadComponents('latest');
                     });
-                }).catch(() => loadComponents());
-            } else return loadComponents();
+                }).catch(() => loadComponents('latest'));
+            } else return loadComponents('latest');
         } else {
             requestIdleCallback(() => {
                 // when browser idle, notice user he/she is using web platform, some function may be disabled, suggest he/she installing app
@@ -175,18 +175,18 @@ onMounted(() => {
                 }]);
             });
 
-            return loadComponents();
+            return loadComponents('latest');
         }
     });
 });
 
 const releaseLogBox = ref<HTMLElement | null>(null);
-const loadComponents = () => {
+const loadComponents = (version: [number, number, number] | 'latest') => {
     Promise.all([
 
     ]).then(() => {
         isLoading.value = false; // finished initializing, load page components
-        import('../api/getLatestReleaseLog').then(releaseLogGetter => releaseLogGetter.default(props.i18n.lang as config['language'])).then(value => value.data).then(releaseLog => {
+        import('../api/getReleaseLog').then(releaseLogGetter => releaseLogGetter.default(props.i18n.lang as config['language'], version)).then(value => value.data).then(releaseLog => {
             // get release log
             // import editor
             import('monaco-editor').then(monaco => {
