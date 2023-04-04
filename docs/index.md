@@ -16,18 +16,18 @@ Use your browser to visit <https://mep2.lihugang.top/download> or <https://githu
 4. Build frontend programs `pnpm run build` (You must install **node** and **pnpm** first)
 - - -
 1. For web platform, make a new directory to store service `mkdir ~/mep@2-web/`
-2. Copy server source code to a new directory `cp -r ./backend/web/ ~/mep@2-web/`
+2. Copy server source code to a new directory `cp -r ./backend/web/* ~/mep@2-web/`
 3. Create a directory to store client resources `mkdir ~/mep@2-web/resources/`
-4. Copy client builds `cp -r ./dist/ ~/mep@2-web/resources/`
+4. Copy client builds `cp -r ./dist/* ~/mep@2-web/resources/`
 5. Change directory to service path `cd ~/mep@2-web/`
 6. Install dependicies `pnpm install`
 7. Transpile `ts` code to `js` `pnpm run build`
 8. Start service `node .`
 - - -
 1. For app platform, make a new directory to store source code `mkdir ~/mep@2-app/`
-2. Copy app backend source codes `cp -r ./backend/app/ ~/mep@2-app/`
+2. Copy app backend source codes `cp -r ./backend/app/* ~/mep@2-app/`
 3. Make a directory to store client resources `mkdir ~/mep@2-app/resources/`
-4. Copy client builds `cp -r ./dist/ ~/mep@2-app/resources/`
+4. Copy client builds `cp -r ./dist/* ~/mep@2-app/resources/`
 5. Change directory to service path `cd ~/mep@2-app/`
 6. Install dependicies `pnpm install`
 7. Build `pnpm run build`
