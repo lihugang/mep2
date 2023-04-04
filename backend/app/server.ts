@@ -91,7 +91,7 @@ export default function startServer(config: {
             router.get('/currentVersion', (req, res) => {
                 res.status(200).json({
                     ok: true,
-                    data: [2, 1, 1]
+                    data: [2, 1, 2]
                 });
             });
 

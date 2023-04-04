@@ -17,7 +17,7 @@
                 <div class="about-container" :style="{
                     height: innerHeight - 200 + 'px'
                 }">
-                    MEP Version 2.1.1 <img height="32" width="32" src="/logo.png" title="logo">
+                    MEP Version 2.1.2 <img height="32" width="32" src="/logo.png" title="logo">
                     <br />
                     Release Time: 02-08-2023 <br />
                     Official website: <a href="https://mep2.lihugang.top">mep2.lihugang.top</a> <br />

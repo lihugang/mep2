@@ -1,7 +1,6 @@
 {
     "name": "mep2",
-    "version": "2.1.1",
-    "private": true,
+    "version": "2.1.2",
     "scripts": {
         "dev": "vite",
         "build": "run-p type-check build-only",

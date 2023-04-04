@@ -1,4 +1,4 @@
-# the Math Editor for Photos (MEP) 2.1.1 Documentation
+# the Math Editor for Photos (MEP) 2.1.2 Documentation
 ![the Math Editor for Photos@2](software-title.png)
 - - -
 Visit counts: ![visit-count](https://profile-counter.glitch.me/lihugang-MEP2/count.svg)
